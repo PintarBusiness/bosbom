@@ -30,6 +30,10 @@
     cursor: none;
   }
 
+  @media (max-width: 768px) {
+    body { cursor: auto; }
+  }
+
   /* CUSTOM CURSOR */
   .cursor {
     position: fixed; width: 12px; height: 12px;
@@ -47,7 +51,9 @@
     transition: transform 0.18s ease, width 0.25s, height 0.25s, opacity 0.2s;
     opacity: 0.6;
   }
-  body:hover .cursor { opacity: 1; }
+  @media (max-width: 768px) {
+    .cursor, .cursor-ring { display: none; }
+  }
 
   /* NOISE OVERLAY */
   body::after {
@@ -62,11 +68,17 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 500;
     display: flex; justify-content: space-between; align-items: center;
     padding: 1.6rem 3rem;
-    mix-blend-mode: difference;
+    transition: transform 0.35s ease, background 0.3s;
+  }
+  nav.scrolled {
+    background: rgba(13,13,13,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
   }
   .nav-logo {
     font-family: var(--font-display); font-size: 1.4rem; font-weight: 900;
     color: var(--off-white); text-decoration: none; letter-spacing: -0.02em;
+    z-index: 600; position: relative;
   }
   .nav-logo span { color: var(--red); }
   .nav-links { display: flex; gap: 2.4rem; list-style: none; }
@@ -76,6 +88,71 @@
     opacity: 0.7; transition: opacity 0.2s;
   }
   .nav-links a:hover { opacity: 1; }
+
+  /* HAMBURGER */
+  .hamburger {
+    display: none;
+    flex-direction: column; justify-content: center; gap: 5px; cursor: pointer;
+    z-index: 600; position: relative; padding: 8px;
+    background: none; border: none; -webkit-tap-highlight-color: transparent;
+    min-width: 44px; min-height: 44px;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--off-white); transition: all 0.3s ease;
+    transform-origin: center; border-radius: 1px;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* MOBILE MENU OVERLAY */
+  .mobile-menu {
+    display: none;
+    position: fixed; inset: 0; z-index: 550;
+    background: var(--black);
+    flex-direction: column; justify-content: center; align-items: center;
+    gap: 0;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+  .mobile-menu.open {
+    opacity: 1; pointer-events: all;
+  }
+  .mobile-menu ul {
+    list-style: none; text-align: center;
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .mobile-menu ul li {
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    overflow: hidden;
+  }
+  .mobile-menu ul li:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+  .mobile-menu ul a {
+    display: block; padding: 1.4rem 3rem;
+    font-family: var(--font-display); font-size: 2.2rem; font-weight: 900;
+    color: var(--off-white); text-decoration: none; letter-spacing: -0.02em;
+    transition: color 0.2s;
+  }
+  .mobile-menu ul a:hover, .mobile-menu ul a:active { color: var(--red); }
+  .mobile-menu-close {
+    position: absolute; top: 1.4rem; right: 1.5rem;
+    background: none; border: 1.5px solid rgba(255,255,255,0.2); color: var(--off-white);
+    font-size: 1.1rem; width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; border-radius: 50%;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    -webkit-tap-highlight-color: transparent;
+    z-index: 10;
+  }
+  .mobile-menu-close:hover, .mobile-menu-close:active {
+    border-color: var(--red); color: var(--red); background: rgba(200,16,46,0.08);
+  }
+    font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--grey);
+  }
+  .mobile-menu-footer a { color: var(--grey); text-decoration: none; }
+  .mobile-menu-footer a:hover { color: var(--red); }
 
   /* HERO */
   #hero {
@@ -98,6 +175,7 @@
     text-transform: uppercase; color: var(--red);
     margin-bottom: 1.2rem; opacity: 0;
     animation: fadeUp 0.8s 0.3s ease forwards;
+    position: relative;
   }
   .hero-title {
     font-family: var(--font-display); font-size: clamp(5rem, 13vw, 11rem);
@@ -110,10 +188,12 @@
     margin-top: 1.8rem; font-size: 1.05rem; font-weight: 300;
     color: var(--cream); max-width: 380px; line-height: 1.65;
     opacity: 0; animation: fadeUp 0.9s 0.75s ease forwards;
+    position: relative;
   }
   .hero-cta {
     display: flex; gap: 1.2rem; margin-top: 2.8rem;
     opacity: 0; animation: fadeUp 0.9s 0.95s ease forwards;
+    position: relative; flex-wrap: wrap;
   }
   .btn-primary {
     background: var(--red); color: #fff;
@@ -139,6 +219,7 @@
     text-transform: uppercase; color: var(--grey);
     writing-mode: vertical-rl; display: flex; align-items: center; gap: 0.8rem;
     opacity: 0; animation: fadeIn 1s 1.5s ease forwards;
+    z-index: 2;
   }
   .hero-scroll::before {
     content: ''; width: 1px; height: 50px;
@@ -219,6 +300,7 @@
   .about-stats {
     display: flex; gap: 2.5rem; margin-top: 2.5rem;
     border-top: 1px solid rgba(0,0,0,0.12); padding-top: 2rem;
+    flex-wrap: wrap;
   }
   .stat-num {
     font-family: var(--font-display); font-size: 2.8rem; font-weight: 900;
@@ -426,6 +508,7 @@
     font-family: var(--font-body); font-size: 0.92rem; font-weight: 300;
     outline: none; transition: border-color 0.2s;
     appearance: none; -webkit-appearance: none;
+    border-radius: 0;
   }
   .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
     border-color: var(--red);
@@ -435,7 +518,7 @@
   .btn-submit {
     background: transparent; border: 1.5px solid var(--red); color: var(--red);
     font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.15em;
-    text-transform: uppercase; padding: 1.1rem 2.5rem; cursor: none;
+    text-transform: uppercase; padding: 1.1rem 2.5rem; cursor: pointer;
     transition: background 0.25s, color 0.25s; align-self: flex-start;
     clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
   }
@@ -449,6 +532,7 @@
   .footer-inner {
     max-width: 1100px; margin: 0 auto;
     display: flex; justify-content: space-between; align-items: center;
+    gap: 1.5rem; flex-wrap: wrap;
   }
   .footer-logo {
     font-family: var(--font-display); font-size: 1.6rem; font-weight: 900;
@@ -466,6 +550,19 @@
     transition: color 0.2s;
   }
   .footer-social a:hover { color: var(--red); }
+  .footer-credit {
+    width: 100%;
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    margin-top: 1rem;
+  }
+  .footer-credit a {
+    font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(136,136,136,0.5); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-credit a:hover { color: var(--red); }
 
   /* SCROLL REVEAL */
   .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -475,17 +572,84 @@
   .reveal-d3 { transition-delay: 0.3s; }
   .reveal-d4 { transition-delay: 0.4s; }
 
+  /* =====================
+     MOBILE RESPONSIVE
+  ===================== */
+  @media (max-width: 900px) {
+    .services-grid { grid-template-columns: 1fr 1fr; }
+  }
+
   @media (max-width: 768px) {
-    nav { padding: 1.2rem 1.5rem; }
+    /* Nav */
+    nav { padding: 1.1rem 1.5rem; }
     .nav-links { display: none; }
-    #hero { padding: 5rem 1.5rem 3.5rem; }
-    .about-grid, .contact-grid, .karavana-inner { grid-template-columns: 1fr; gap: 3rem; }
-    .services-grid { grid-template-columns: 1fr; }
-    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-    .g1,.g2,.g3,.g4,.g5,.g6 { grid-column: span 1; min-height: 200px; }
+    .hamburger { display: flex; }
+    .mobile-menu { display: flex; }
+
+    /* Hero */
+    #hero { padding: 6rem 1.5rem 3.5rem; min-height: 100svh; }
+    .hero-title { font-size: clamp(4rem, 18vw, 7rem); }
+    .hero-sub { font-size: 0.95rem; max-width: 100%; }
+    .hero-cta { flex-direction: column; gap: 0.8rem; }
+    .btn-primary, .btn-outline { text-align: center; width: 100%; max-width: 280px; }
+    .hero-scroll { display: none !important; }
+
+    /* About */
+    #about { padding: 4.5rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-img-wrap { aspect-ratio: 16/9; }
+    .about-img-wrap::after { transform: translate(8px, 8px); }
+    .about-stats { gap: 1.5rem; }
+    .stat-num { font-size: 2.2rem; }
+
+    /* Services */
+    #services { padding: 4.5rem 1.5rem; }
+    .services-grid { grid-template-columns: 1fr; border: none; gap: 1px; }
+    .service-card { padding: 2.5rem 2rem; }
+
+    /* Menu */
+    #menu { padding: 4.5rem 0; }
+    .menu-header { padding: 0 1.5rem; }
+    .menu-track { padding: 0 1.5rem; }
+    .menu-card { width: 220px; }
+    .menu-card img { height: 160px; }
+
+    /* Gallery */
+    #gallery { padding: 4.5rem 1.5rem; }
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+    .g1 { grid-column: span 2; grid-row: span 1; min-height: 220px; }
+    .g2, .g3 { grid-column: span 1; min-height: 160px; }
+    .g4, .g5, .g6 { grid-column: span 1; min-height: 140px; }
+
+    /* Karavana */
+    #karavana { padding: 4.5rem 1.5rem; }
+    #karavana::before { font-size: 5rem; }
+    .karavana-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .karavana-img { order: -1; }
+
+    /* Contact */
+    #contact { padding: 4.5rem 1.5rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
     .form-row { grid-template-columns: 1fr; }
-    #about, #services, #menu, #gallery, #karavana, #contact { padding: 4.5rem 1.5rem; }
-    .footer-inner { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .btn-submit { width: 100%; align-self: stretch; clip-path: none; }
+
+    /* Footer */
+    footer { padding: 2rem 1.5rem; }
+    .footer-inner { flex-direction: column; text-align: center; align-items: center; }
+    .footer-social { justify-content: center; }
+
+    /* Section titles */
+    .section-title { font-size: clamp(2rem, 8vw, 3rem); }
+  }
+
+  @media (max-width: 400px) {
+    .hero-title { font-size: clamp(3.5rem, 20vw, 5.5rem); }
+    .about-stats { flex-direction: column; gap: 1.5rem; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .g1, .g2, .g3, .g4, .g5, .g6 { grid-column: span 1; min-height: 200px; }
   }
 </style>
 </head>
@@ -495,8 +659,24 @@
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Zapri meni">✕</button>
+  <ul>
+    <li><a href="#about" class="mobile-nav-link">O nas</a></li>
+    <li><a href="#services" class="mobile-nav-link">Storitve</a></li>
+    <li><a href="#menu" class="mobile-nav-link">Meni</a></li>
+    <li><a href="#gallery" class="mobile-nav-link">Galerija</a></li>
+    <li><a href="#contact" class="mobile-nav-link">Kontakt</a></li>
+  </ul>
+  <div class="mobile-menu-footer">
+    <a href="tel:+38640744174">040 744 174</a> &nbsp;·&nbsp;
+    <a href="mailto:bosbom.streetfood@gmail.com">bosbom.streetfood@gmail.com</a>
+  </div>
+</div>
+
 <!-- NAV -->
-<nav>
+<nav id="mainNav">
   <a class="nav-logo" href="#hero">Boš<span>?</span> Bom.</a>
   <ul class="nav-links">
     <li><a href="#about">O nas</a></li>
@@ -505,6 +685,9 @@
     <li><a href="#gallery">Galerija</a></li>
     <li><a href="#contact">Kontakt</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="Meni">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -598,7 +781,7 @@
       <span class="service-icon">🎡</span>
       <h3 class="service-title">Karavana okusov</h3>
       <p class="service-desc">Nastopamo na festivalih in prireditvah po vsej Sloveniji. Preveri kje smo naslednjič in pridi na obisk!</p>
-      <a href="#contact" class="service-link">Kjer smo →</a>
+      <a href="#karavana" class="service-link">Kjer smo →</a>
     </div>
   </div>
 </section>
@@ -611,7 +794,6 @@
   </div>
   <div class="menu-scroll-wrap">
     <div class="menu-track">
-      <!-- card set 1 -->
       <div class="menu-card">
         <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80" alt="Burger">
         <div class="menu-card-body">
@@ -777,19 +959,19 @@
       <div class="contact-info reveal reveal-d3">
         <div class="contact-info-item">
           <span class="ci-label">Tel</span>
-          <span class="ci-val"><a href="tel:+38641000000">+386 41 000 000</a></span>
+          <span class="ci-val"><a href="tel:+38640744174">040 744 174</a></span>
         </div>
         <div class="contact-info-item">
           <span class="ci-label">Email</span>
-          <span class="ci-val"><a href="mailto:info@bosbom.si">info@bosbom.si</a></span>
+          <span class="ci-val"><a href="mailto:bosbom.streetfood@gmail.com">bosbom.streetfood@gmail.com</a></span>
         </div>
         <div class="contact-info-item">
           <span class="ci-label">Instagram</span>
-          <span class="ci-val"><a href="#">@bosbom_streetfood</a></span>
+          <span class="ci-val"><a href="https://www.instagram.com/bosbomstreetfood/" target="_blank" rel="noopener">@bosbomstreetfood</a></span>
         </div>
         <div class="contact-info-item">
           <span class="ci-label">Facebook</span>
-          <span class="ci-val"><a href="#">Boš? Bom. Streetfood</a></span>
+          <span class="ci-val"><a href="https://www.facebook.com/p/Bo%C5%A1-Bom-streetfoodcatering-100063591072955/" target="_blank" rel="noopener">Boš? Bom. Streetfood</a></span>
         </div>
       </div>
     </div>
@@ -841,36 +1023,60 @@
     <div class="footer-logo">Boš<span>?</span> Bom.</div>
     <div class="footer-copy">© 2025 Boš? Bom. Streetfood — Vse pravice pridržane</div>
     <div class="footer-social">
-      <a href="#">Instagram</a>
-      <a href="#">Facebook</a>
-      <a href="#">TikTok</a>
+      <a href="https://www.instagram.com/bosbomstreetfood/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/p/Bo%C5%A1-Bom-streetfoodcatering-100063591072955/" target="_blank" rel="noopener">Facebook</a>
+    </div>
+    <div class="footer-credit">
+      <a href="https://pintsite.si" target="_blank" rel="noopener">Izdelava spletne strani: pintsite.si</a>
     </div>
   </div>
 </footer>
 
 <script>
-  // Custom cursor
+  // Custom cursor (desktop only)
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-  function animCursor() {
-    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
-    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    requestAnimationFrame(animCursor);
+  if (cursor && ring && window.matchMedia('(pointer: fine)').matches) {
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    function animCursor() {
+      cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(animCursor);
+    }
+    animCursor();
+    document.querySelectorAll('a, button, .menu-card, .service-card, .g-item').forEach(el => {
+      el.addEventListener('mouseenter', () => { cursor.style.width='20px'; cursor.style.height='20px'; ring.style.width='60px'; ring.style.height='60px'; ring.style.opacity='0.3'; });
+      el.addEventListener('mouseleave', () => { cursor.style.width='12px'; cursor.style.height='12px'; ring.style.width='36px'; ring.style.height='36px'; ring.style.opacity='0.6'; });
+    });
   }
-  animCursor();
-  document.querySelectorAll('a, button, .menu-card, .service-card, .g-item').forEach(el => {
-    el.addEventListener('mouseenter', () => { cursor.style.width='20px'; cursor.style.height='20px'; ring.style.width='60px'; ring.style.height='60px'; ring.style.opacity='0.3'; });
-    el.addEventListener('mouseleave', () => { cursor.style.width='12px'; cursor.style.height='12px'; ring.style.width='36px'; ring.style.height='36px'; ring.style.opacity='0.6'; });
+
+  // Hamburger / mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  let menuOpen = false;
+
+  function toggleMenu(open) {
+    menuOpen = open;
+    hamburger.classList.toggle('open', open);
+    mobileMenu.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  hamburger.addEventListener('click', () => toggleMenu(!menuOpen));
+
+  document.getElementById('mobileMenuClose').addEventListener('click', () => toggleMenu(false));
+
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => toggleMenu(false));
   });
 
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.1 });
   reveals.forEach(r => observer.observe(r));
 
   // Count up animation
@@ -891,17 +1097,19 @@
         statsObs.disconnect();
       }
     });
-  }, { threshold: 0.5 });
+  }, { threshold: 0.4 });
   const statsSection = document.querySelector('.about-stats');
   if (statsSection) statsObs.observe(statsSection);
 
-  // Nav hide/show on scroll
+  // Nav hide/show on scroll + background on scroll
   let lastScroll = 0;
-  const nav = document.querySelector('nav');
+  const nav = document.getElementById('mainNav');
   window.addEventListener('scroll', () => {
     const s = window.scrollY;
-    nav.style.transform = s > lastScroll && s > 100 ? 'translateY(-100%)' : 'translateY(0)';
-    nav.style.transition = 'transform 0.35s ease';
+    if (!menuOpen) {
+      nav.style.transform = s > lastScroll && s > 100 ? 'translateY(-100%)' : 'translateY(0)';
+    }
+    nav.classList.toggle('scrolled', s > 50);
     lastScroll = s;
   });
 </script>
