@@ -148,11 +148,18 @@
   .mobile-menu-close:hover, .mobile-menu-close:active {
     border-color: var(--red); color: var(--red); background: rgba(200,16,46,0.08);
   }
+  .mobile-menu-footer {
+    margin-top: 3rem; text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  }
+  .mobile-menu-footer a {
     font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em;
     text-transform: uppercase; color: var(--grey);
+    text-decoration: none; transition: color 0.2s;
+    -webkit-tap-highlight-color: transparent;
   }
-  .mobile-menu-footer a { color: var(--grey); text-decoration: none; }
-  .mobile-menu-footer a:hover { color: var(--red); }
+  .mobile-menu-footer a:hover, .mobile-menu-footer a:active { color: var(--off-white); }
+  .mobile-menu-footer .dot { color: rgba(136,136,136,0.35); }
 
   /* HERO */
   #hero {
@@ -670,7 +677,8 @@
     <li><a href="#contact" class="mobile-nav-link">Kontakt</a></li>
   </ul>
   <div class="mobile-menu-footer">
-    <a href="tel:+38640744174">040 744 174</a> &nbsp;·&nbsp;
+    <a href="tel:+38640744174">040 744 174</a>
+    <span class="dot">·</span>
     <a href="mailto:bosbom.streetfood@gmail.com">bosbom.streetfood@gmail.com</a>
   </div>
 </div>
