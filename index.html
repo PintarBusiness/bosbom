@@ -67,7 +67,7 @@
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 500;
     display: flex; justify-content: space-between; align-items: center;
-    padding: 1.6rem 3rem;
+    padding: 1.2rem 3rem;
     transition: transform 0.35s ease, background 0.3s;
   }
   nav.scrolled {
@@ -76,11 +76,17 @@
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
   .nav-logo {
-    font-family: var(--font-display); font-size: 1.4rem; font-weight: 900;
-    color: var(--off-white); text-decoration: none; letter-spacing: -0.02em;
+    display: flex; align-items: center;
+    text-decoration: none;
     z-index: 600; position: relative;
   }
-  .nav-logo span { color: var(--red); }
+  .nav-logo img {
+    height: 52px;
+    width: auto;
+    object-fit: contain;
+    transition: opacity 0.2s;
+  }
+  .nav-logo img:hover { opacity: 0.85; }
   .nav-links { display: flex; gap: 2.4rem; list-style: none; }
   .nav-links a {
     font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em;
@@ -170,7 +176,7 @@
   }
   .hero-bg {
     position: absolute; inset: 0;
-    background: url('https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=1400&q=80') center/cover;
+    background: url('images/testna.webp') center/cover;
     filter: brightness(0.28) saturate(0.7);
     transform: scale(1.05);
     animation: heroZoom 12s ease-out forwards;
@@ -541,11 +547,15 @@
     display: flex; justify-content: space-between; align-items: center;
     gap: 1.5rem; flex-wrap: wrap;
   }
-  .footer-logo {
-    font-family: var(--font-display); font-size: 1.6rem; font-weight: 900;
-    color: var(--off-white); letter-spacing: -0.02em;
+  .footer-logo a {
+    display: inline-block; text-decoration: none;
   }
-  .footer-logo span { color: var(--red); font-style: italic; }
+  .footer-logo img {
+    height: 48px; width: auto; object-fit: contain;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+  }
+  .footer-logo img:hover { opacity: 1; }
   .footer-copy {
     font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em;
     color: var(--grey); text-transform: uppercase;
@@ -589,6 +599,7 @@
   @media (max-width: 768px) {
     /* Nav */
     nav { padding: 1.1rem 1.5rem; }
+    .nav-logo img { height: 42px; }
     .nav-links { display: none; }
     .hamburger { display: flex; }
     .mobile-menu { display: flex; }
@@ -685,7 +696,9 @@
 
 <!-- NAV -->
 <nav id="mainNav">
-  <a class="nav-logo" href="#hero">Boš<span>?</span> Bom.</a>
+  <a class="nav-logo" href="#hero">
+    <img src="images/logobrezozadja.png" alt="Boš? Bom.">
+  </a>
   <ul class="nav-links">
     <li><a href="#about">O nas</a></li>
     <li><a href="#services">Storitve</a></li>
@@ -738,7 +751,7 @@
 <section id="about">
   <div class="about-grid">
     <div class="about-img-wrap reveal">
-      <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=800&q=80" alt="Boš? Bom. food truck">
+      <img src="images/IMG_7770.jpeg" alt="Boš? Bom. lastnika">
     </div>
     <div class="about-content">
       <p class="section-label reveal">// O nas</p>
@@ -803,88 +816,88 @@
   <div class="menu-scroll-wrap">
     <div class="menu-track">
       <div class="menu-card">
-        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80" alt="Burger">
+        <img src="images/9921.jpeg" alt="Ćevapčiči">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Klasika</div>
+          <div class="menu-card-title">Ćevapčiči</div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img src="images/14130.jpeg" alt="Burger">
         <div class="menu-card-body">
           <div class="menu-card-tag">Signature</div>
           <div class="menu-card-title">Bom Burger</div>
         </div>
       </div>
       <div class="menu-card">
-        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80" alt="Rebra">
+        <img src="images/IMG_7828.jpeg" alt="Tacos">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Meksika</div>
+          <div class="menu-card-title">Street Tacos</div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img src="images/IMG_7829.jpeg" alt="Burrito">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Wrap</div>
+          <div class="menu-card-title">Burrito</div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img src="images/IMG_7832.jpeg" alt="Krila">
         <div class="menu-card-body">
           <div class="menu-card-tag">BBQ</div>
-          <div class="menu-card-title">Dimljena rebra</div>
+          <div class="menu-card-title">Perutničke</div>
         </div>
       </div>
       <div class="menu-card">
-        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80" alt="Pizza">
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Festival hit</div>
-          <div class="menu-card-title">Ulična pizza</div>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=400&q=80" alt="Chicken">
+        <img src="images/1000006911.jpeg" alt="Crispy Chicken">
         <div class="menu-card-body">
           <div class="menu-card-tag">Crispy</div>
           <div class="menu-card-title">Hrustljav piščanec</div>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400&q=80" alt="Fries">
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Klasika</div>
-          <div class="menu-card-title">Načini krompirčki</div>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="https://images.unsplash.com/photo-1529042410759-befb1204b468?w=400&q=80" alt="Taco">
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Meksika</div>
-          <div class="menu-card-title">Street taco</div>
         </div>
       </div>
       <!-- duplicate for seamless loop -->
       <div class="menu-card">
-        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80" alt="Burger">
+        <img src="images/9921.jpeg" alt="Ćevapčiči">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Klasika</div>
+          <div class="menu-card-title">Ćevapčiči</div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img src="images/14130.jpeg" alt="Burger">
         <div class="menu-card-body">
           <div class="menu-card-tag">Signature</div>
           <div class="menu-card-title">Bom Burger</div>
         </div>
       </div>
       <div class="menu-card">
-        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80" alt="Rebra">
+        <img src="images/IMG_7828.jpeg" alt="Tacos">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Meksika</div>
+          <div class="menu-card-title">Street Tacos</div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img src="images/IMG_7829.jpeg" alt="Burrito">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Wrap</div>
+          <div class="menu-card-title">Burrito</div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img src="images/IMG_7832.jpeg" alt="Krila">
         <div class="menu-card-body">
           <div class="menu-card-tag">BBQ</div>
-          <div class="menu-card-title">Dimljena rebra</div>
+          <div class="menu-card-title">Perutničke</div>
         </div>
       </div>
       <div class="menu-card">
-        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80" alt="Pizza">
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Festival hit</div>
-          <div class="menu-card-title">Ulična pizza</div>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=400&q=80" alt="Chicken">
+        <img src="images/1000006911.jpeg" alt="Crispy Chicken">
         <div class="menu-card-body">
           <div class="menu-card-tag">Crispy</div>
           <div class="menu-card-title">Hrustljav piščanec</div>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400&q=80" alt="Fries">
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Klasika</div>
-          <div class="menu-card-title">Načini krompirčki</div>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="https://images.unsplash.com/photo-1529042410759-befb1204b468?w=400&q=80" alt="Taco">
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Meksika</div>
-          <div class="menu-card-title">Street taco</div>
         </div>
       </div>
     </div>
@@ -899,28 +912,28 @@
   </div>
   <div class="gallery-grid reveal">
     <div class="g-item g1">
-      <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=900&q=80" alt="Food truck event">
+      <img src="images/1552.jpeg" alt="Food truck catering">
       <div class="overlay">Food Truck</div>
     </div>
     <div class="g-item g2">
-      <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80" alt="Catering">
-      <div class="overlay">Catering</div>
+      <img src="images/1000009460.jpeg" alt="Food truck logo">
+      <div class="overlay">Branding</div>
     </div>
     <div class="g-item g3">
-      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Hrana">
-      <div class="overlay">Hrana</div>
+      <img src="images/1573.jpeg" alt="Event sončni zahod">
+      <div class="overlay">Events</div>
     </div>
     <div class="g-item g4">
-      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&q=80" alt="Festival">
-      <div class="overlay">Festival</div>
+      <img src="images/IMG_8473.jpeg" alt="Spread jedi">
+      <div class="overlay">Hrana</div>
     </div>
     <div class="g-item g5">
-      <img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=500&q=80" alt="Ekipa">
-      <div class="overlay">Ekipa</div>
+      <img src="images/1568.jpeg" alt="Catering setup">
+      <div class="overlay">Catering</div>
     </div>
     <div class="g-item g6">
-      <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500&q=80" alt="Burger">
-      <div class="overlay">Specialitete</div>
+      <img src="images/1000011432.jpeg" alt="Lastnika">
+      <div class="overlay">Ekipa</div>
     </div>
   </div>
 </section>
@@ -952,7 +965,7 @@
       </div>
     </div>
     <div class="karavana-img">
-      <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=800&q=80" alt="Karavana okusov">
+      <img src="images/13891.jpeg" alt="Karavana okusov outdoor setup">
     </div>
   </div>
 </section>
@@ -1028,7 +1041,11 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-logo">Boš<span>?</span> Bom.</div>
+    <div class="footer-logo">
+      <a href="#hero">
+        <img src="images/logobrezozadja.png" alt="Boš? Bom.">
+      </a>
+    </div>
     <div class="footer-copy">© 2025 Boš? Bom. Streetfood — Vse pravice pridržane</div>
     <div class="footer-social">
       <a href="https://www.instagram.com/bosbomstreetfood/" target="_blank" rel="noopener">Instagram</a>
@@ -1073,9 +1090,7 @@
   }
 
   hamburger.addEventListener('click', () => toggleMenu(!menuOpen));
-
   document.getElementById('mobileMenuClose').addEventListener('click', () => toggleMenu(false));
-
   document.querySelectorAll('.mobile-nav-link').forEach(link => {
     link.addEventListener('click', () => toggleMenu(false));
   });
