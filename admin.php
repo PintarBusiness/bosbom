@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['password'])) {
 }
 if (isset($_GET['logout'])) {
     session_destroy();
-    header('Location: admin_events.php');
+    header('Location: admin.php');
     exit;
 }
 
@@ -50,7 +50,7 @@ if (!empty($_SESSION['admin'])) {
         $events = loadEvents();
         array_splice($events, $idx, 1);
         saveEvents($events);
-        header('Location: admin_events.php?ok=1');
+        header('Location: admin.php?ok=1');
         exit;
     }
     // Move up/down
@@ -63,7 +63,7 @@ if (!empty($_SESSION['admin'])) {
             [$events[$idx], $events[$swap]] = [$events[$swap], $events[$idx]];
             saveEvents($events);
         }
-        header('Location: admin_events.php');
+        header('Location: admin.php');
         exit;
     }
 }
