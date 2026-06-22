@@ -34,7 +34,6 @@
     body { cursor: auto; }
   }
 
-  /* CUSTOM CURSOR */
   .cursor {
     position: fixed; width: 12px; height: 12px;
     background: var(--red); border-radius: 50%;
@@ -55,7 +54,6 @@
     .cursor, .cursor-ring { display: none; }
   }
 
-  /* NOISE OVERLAY */
   body::after {
     content: '';
     position: fixed; inset: 0;
@@ -63,7 +61,6 @@
     pointer-events: none; z-index: 100; opacity: 0.35;
   }
 
-  /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 500;
     display: flex; justify-content: space-between; align-items: center;
@@ -81,9 +78,7 @@
     z-index: 600; position: relative;
   }
   .nav-logo img {
-    height: 52px;
-    width: auto;
-    object-fit: contain;
+    height: 52px; width: auto; object-fit: contain;
     transition: opacity 0.2s;
   }
   .nav-logo img:hover { opacity: 0.85; }
@@ -95,7 +90,6 @@
   }
   .nav-links a:hover { opacity: 1; }
 
-  /* HAMBURGER */
   .hamburger {
     display: none;
     flex-direction: column; justify-content: center; gap: 5px; cursor: pointer;
@@ -112,26 +106,21 @@
   .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
   .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  /* MOBILE MENU OVERLAY */
   .mobile-menu {
     display: none;
     position: fixed; inset: 0; z-index: 550;
     background: var(--black);
     flex-direction: column; justify-content: center; align-items: center;
-    gap: 0;
     opacity: 0; pointer-events: none;
     transition: opacity 0.35s ease;
   }
-  .mobile-menu.open {
-    opacity: 1; pointer-events: all;
-  }
+  .mobile-menu.open { opacity: 1; pointer-events: all; }
   .mobile-menu ul {
     list-style: none; text-align: center;
     display: flex; flex-direction: column; gap: 0;
   }
   .mobile-menu ul li {
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    overflow: hidden;
+    border-bottom: 1px solid rgba(255,255,255,0.06); overflow: hidden;
   }
   .mobile-menu ul li:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
   .mobile-menu ul a {
@@ -148,8 +137,7 @@
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; border-radius: 50%;
     transition: border-color 0.2s, color 0.2s, background 0.2s;
-    -webkit-tap-highlight-color: transparent;
-    z-index: 10;
+    -webkit-tap-highlight-color: transparent; z-index: 10;
   }
   .mobile-menu-close:hover, .mobile-menu-close:active {
     border-color: var(--red); color: var(--red); background: rgba(200,16,46,0.08);
@@ -176,7 +164,7 @@
   }
   .hero-bg {
     position: absolute; inset: 0;
-    background: url('images/testna.webp') center/cover;
+    background: url('images/1551.jpeg') center 5%/cover;
     filter: brightness(0.28) saturate(0.7);
     transform: scale(1.05);
     animation: heroZoom 12s ease-out forwards;
@@ -190,13 +178,20 @@
     animation: fadeUp 0.8s 0.3s ease forwards;
     position: relative;
   }
-  .hero-title {
-    font-family: var(--font-display); font-size: clamp(5rem, 13vw, 11rem);
-    font-weight: 900; line-height: 0.92; letter-spacing: -0.03em;
-    color: var(--off-white); position: relative;
-    opacity: 0; animation: fadeUp 0.9s 0.5s ease forwards;
+
+  /* LOGO namesto besedila v heroju */
+  .hero-logo-main {
+    position: relative;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s ease forwards;
   }
-  .hero-title .accent { color: var(--red); font-style: italic; }
+  .hero-logo-main img {
+    height: clamp(100px, 20vw, 200px);
+    width: auto;
+    object-fit: contain;
+    filter: brightness(1.05);
+  }
+
   .hero-sub {
     margin-top: 1.8rem; font-size: 1.05rem; font-weight: 300;
     color: var(--cream); max-width: 380px; line-height: 1.65;
@@ -252,7 +247,6 @@
   }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-  /* SECTION BASE */
   section { position: relative; }
   .section-label {
     font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.25em;
@@ -263,7 +257,6 @@
     font-weight: 900; line-height: 1.05; letter-spacing: -0.02em;
   }
 
-  /* STRIP */
   .ticker-strip {
     background: var(--red); padding: 0.75rem 0; overflow: hidden;
     border-top: 1px solid rgba(255,255,255,0.1);
@@ -336,6 +329,9 @@
     max-width: 1100px; margin: 0 auto;
     border: 1.5px solid rgba(255,255,255,0.06);
   }
+  .services-grid--two {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .service-card {
     position: relative; overflow: hidden; padding: 3rem 2.5rem;
     background: var(--black); transition: background 0.3s;
@@ -372,7 +368,7 @@
   }
   .service-link:hover { gap: 1rem; }
 
-  /* MENU PREVIEW */
+  /* MENU */
   #menu {
     background: var(--off-white); color: var(--black); padding: 7rem 0;
   }
@@ -393,16 +389,8 @@
     transition: transform 0.3s, box-shadow 0.3s;
   }
   .menu-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.15); }
-  .menu-card img { width: 100%; height: 200px; object-fit: cover; display: block; filter: saturate(0.85); }
-  .menu-card-body { padding: 1.3rem; }
-  .menu-card-title {
-    font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;
-    color: var(--black); margin-bottom: 0.4rem;
-  }
-  .menu-card-tag {
-    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em;
-    text-transform: uppercase; color: var(--red);
-  }
+  .menu-card img { width: 100%; height: 280px; object-fit: cover; display: block; filter: saturate(0.85); }
+  .menu-card-body { display: none; }
 
   /* GALLERY */
   #gallery {
@@ -417,9 +405,7 @@
     grid-template-rows: auto;
     gap: 0.8rem;
   }
-  .g-item {
-    overflow: hidden; position: relative;
-  }
+  .g-item { overflow: hidden; position: relative; }
   .g-item img {
     width: 100%; height: 100%; object-fit: cover; display: block;
     transition: transform 0.5s ease, filter 0.4s;
@@ -432,7 +418,6 @@
   .g4 { grid-column: span 4; min-height: 220px; }
   .g5 { grid-column: span 4; min-height: 220px; }
   .g6 { grid-column: span 4; min-height: 220px; }
-
   .g-item .overlay {
     position: absolute; inset: 0; background: rgba(200,16,46,0.7);
     opacity: 0; display: flex; align-items: center; justify-content: center;
@@ -468,8 +453,7 @@
   }
   .karavana-img::after {
     content: ''; position: absolute; inset: 0;
-    background: rgba(0,0,0,0.2);
-    mix-blend-mode: multiply;
+    background: rgba(0,0,0,0.2); mix-blend-mode: multiply;
   }
   .events-list {
     margin-top: 2.5rem; display: flex; flex-direction: column; gap: 0.8rem;
@@ -490,6 +474,29 @@
     padding: 1rem 0;
   }
 
+  /* FACEBOOK */
+  #facebook {
+    background: var(--black); padding: 7rem 3rem;
+    background-image: radial-gradient(ellipse at 50% 100%, rgba(200,16,46,0.05) 0%, transparent 60%);
+  }
+  .fb-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+  }
+  .fb-left .section-title { color: var(--off-white); margin-bottom: 1.2rem; }
+  .fb-left p { color: #999; font-size: 1rem; line-height: 1.75; font-weight: 300; }
+  .fb-right {
+    display: flex; justify-content: center;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 1.5rem;
+    min-height: 300px;
+  }
+  @media (max-width: 768px) {
+    .fb-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .fb-right { padding: 1rem; }
+  }
+
   /* CONTACT */
   #contact {
     background: var(--charcoal); padding: 7rem 3rem;
@@ -502,9 +509,7 @@
   .contact-left .section-title { color: var(--off-white); margin-bottom: 1.5rem; }
   .contact-left p { color: #999; font-size: 1rem; line-height: 1.75; font-weight: 300; margin-bottom: 2.5rem; }
   .contact-info { display: flex; flex-direction: column; gap: 1.2rem; }
-  .contact-info-item {
-    display: flex; align-items: flex-start; gap: 1rem;
-  }
+  .contact-info-item { display: flex; align-items: flex-start; gap: 1rem; }
   .ci-label {
     font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.2em;
     text-transform: uppercase; color: var(--red); width: 70px; flex-shrink: 0; padding-top: 2px;
@@ -534,7 +539,6 @@
   .form-group textarea { resize: none; height: 130px; }
   .form-group select option { background: var(--charcoal); }
 
-  /* Submit button states */
   .btn-submit {
     background: transparent; border: 1.5px solid var(--red); color: var(--red);
     font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.15em;
@@ -549,7 +553,6 @@
   .btn-submit.success { border-color: #4caf50; color: #4caf50; background: rgba(76,175,80,0.08); }
   .btn-submit.error { border-color: var(--red); color: #fff; background: var(--red); }
 
-  /* Form feedback message */
   .form-msg {
     font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em;
     padding: 0.9rem 1.2rem; display: none;
@@ -558,7 +561,6 @@
   .form-msg.ok { background: rgba(76,175,80,0.1); border: 1px solid rgba(76,175,80,0.3); color: #4caf50; }
   .form-msg.err { background: rgba(200,16,46,0.1); border: 1px solid rgba(200,16,46,0.3); color: #ff6b6b; }
 
-  /* FOOTER */
   footer {
     background: var(--black); padding: 3rem;
     border-top: 1px solid rgba(255,255,255,0.06);
@@ -568,13 +570,10 @@
     display: flex; justify-content: space-between; align-items: center;
     gap: 1.5rem; flex-wrap: wrap;
   }
-  .footer-logo a {
-    display: inline-block; text-decoration: none;
-  }
+  .footer-logo a { display: inline-block; text-decoration: none; }
   .footer-logo img {
     height: 48px; width: auto; object-fit: contain;
-    opacity: 0.85;
-    transition: opacity 0.2s;
+    opacity: 0.85; transition: opacity 0.2s;
   }
   .footer-logo img:hover { opacity: 1; }
   .footer-copy {
@@ -589,8 +588,7 @@
   }
   .footer-social a:hover { color: var(--red); }
   .footer-credit {
-    width: 100%;
-    text-align: center;
+    width: 100%; text-align: center;
     padding-top: 1.5rem;
     border-top: 1px solid rgba(255,255,255,0.06);
     margin-top: 1rem;
@@ -602,7 +600,6 @@
   }
   .footer-credit a:hover { color: var(--red); }
 
-  /* SCROLL REVEAL */
   .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
   .reveal-d1 { transition-delay: 0.1s; }
@@ -610,9 +607,6 @@
   .reveal-d3 { transition-delay: 0.3s; }
   .reveal-d4 { transition-delay: 0.4s; }
 
-  /* =====================
-     MOBILE RESPONSIVE
-  ===================== */
   @media (max-width: 900px) {
     .services-grid { grid-template-columns: 1fr 1fr; }
   }
@@ -625,7 +619,7 @@
     .mobile-menu { display: flex; }
 
     #hero { padding: 6rem 1.5rem 3.5rem; min-height: 100svh; }
-    .hero-title { font-size: clamp(4rem, 18vw, 7rem); }
+    .hero-logo-main img { height: clamp(80px, 35vw, 140px); }
     .hero-sub { font-size: 0.95rem; max-width: 100%; }
     .hero-cta { flex-direction: column; gap: 0.8rem; }
     .btn-primary, .btn-outline { text-align: center; width: 100%; max-width: 280px; }
@@ -672,7 +666,7 @@
   }
 
   @media (max-width: 400px) {
-    .hero-title { font-size: clamp(3.5rem, 20vw, 5.5rem); }
+    .hero-logo-main img { height: clamp(70px, 40vw, 110px); }
     .about-stats { flex-direction: column; gap: 1.5rem; }
     .gallery-grid { grid-template-columns: 1fr; }
     .g1, .g2, .g3, .g4, .g5, .g6 { grid-column: span 1; min-height: 200px; }
@@ -681,15 +675,14 @@
 </head>
 <body>
 
-<!-- CURSOR -->
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Zapri meni">✕</button>
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Zapri meni">&#x2715;</button>
   <ul>
-    <li><a href="#about" class="mobile-nav-link">O nas</a></li>
+    <li><a href="#about" class="mobile-nav-link">O naju</a></li>
     <li><a href="#services" class="mobile-nav-link">Storitve</a></li>
     <li><a href="#menu" class="mobile-nav-link">Meni</a></li>
     <li><a href="#gallery" class="mobile-nav-link">Galerija</a></li>
@@ -697,7 +690,7 @@
   </ul>
   <div class="mobile-menu-footer">
     <a href="tel:+38640744174">040 744 174</a>
-    <span class="dot">·</span>
+    <span class="dot">&middot;</span>
     <a href="mailto:bosbom.streetfood@gmail.com">bosbom.streetfood@gmail.com</a>
   </div>
 </div>
@@ -708,7 +701,7 @@
     <img src="images/logobrezozadja.png" alt="Boš? Bom.">
   </a>
   <ul class="nav-links">
-    <li><a href="#about">O nas</a></li>
+    <li><a href="#about">O naju</a></li>
     <li><a href="#services">Storitve</a></li>
     <li><a href="#menu">Meni</a></li>
     <li><a href="#gallery">Galerija</a></li>
@@ -722,11 +715,13 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg"></div>
-  <p class="hero-tag">Streetfood · Catering · Karavana okusov</p>
-  <h1 class="hero-title">Boš?<br><span class="accent">Bom.</span></h1>
-  <p class="hero-sub">Ulična hrana z dušo — za tvojo prireditev, korporativni event ali festival.</p>
+  <p class="hero-tag">Streetfood &middot; Catering &middot; Karavana okusov</p>
+  <div class="hero-logo-main">
+    <img src="images/logobrezozadja.png" alt="Boš? Bom.">
+  </div>
+  <p class="hero-sub">Ulična hrana z dušo &mdash; za vajino prireditev, korporativni event ali festival.</p>
   <div class="hero-cta">
-    <a href="#contact" class="btn-primary">Naroči catering</a>
+    <a href="#contact" class="btn-primary">Naročita catering</a>
     <a href="#services" class="btn-outline">Kaj ponujamo</a>
   </div>
   <div class="hero-scroll">Scroll</div>
@@ -736,22 +731,22 @@
 <!-- TICKER -->
 <div class="ticker-strip">
   <div class="ticker-track" id="ticker">
-    <span>Food Truck</span><span class="dot">✦</span>
-    <span>Catering</span><span class="dot">✦</span>
-    <span>Karavana okusov</span><span class="dot">✦</span>
-    <span>Prireditve</span><span class="dot">✦</span>
-    <span>Poroke</span><span class="dot">✦</span>
-    <span>Festivali</span><span class="dot">✦</span>
-    <span>Korporativni eventi</span><span class="dot">✦</span>
-    <span>Streetfood</span><span class="dot">✦</span>
-    <span>Food Truck</span><span class="dot">✦</span>
-    <span>Catering</span><span class="dot">✦</span>
-    <span>Karavana okusov</span><span class="dot">✦</span>
-    <span>Prireditve</span><span class="dot">✦</span>
-    <span>Poroke</span><span class="dot">✦</span>
-    <span>Festivali</span><span class="dot">✦</span>
-    <span>Korporativni eventi</span><span class="dot">✦</span>
-    <span>Streetfood</span><span class="dot">✦</span>
+    <span>Food Truck</span><span class="dot">&#x2736;</span>
+    <span>Catering</span><span class="dot">&#x2736;</span>
+    <span>Karavana okusov</span><span class="dot">&#x2736;</span>
+    <span>Prireditve</span><span class="dot">&#x2736;</span>
+    <span>Poroke</span><span class="dot">&#x2736;</span>
+    <span>Festivali</span><span class="dot">&#x2736;</span>
+    <span>Korporativni eventi</span><span class="dot">&#x2736;</span>
+    <span>Streetfood</span><span class="dot">&#x2736;</span>
+    <span>Food Truck</span><span class="dot">&#x2736;</span>
+    <span>Catering</span><span class="dot">&#x2736;</span>
+    <span>Karavana okusov</span><span class="dot">&#x2736;</span>
+    <span>Prireditve</span><span class="dot">&#x2736;</span>
+    <span>Poroke</span><span class="dot">&#x2736;</span>
+    <span>Festivali</span><span class="dot">&#x2736;</span>
+    <span>Korporativni eventi</span><span class="dot">&#x2736;</span>
+    <span>Streetfood</span><span class="dot">&#x2736;</span>
   </div>
 </div>
 
@@ -762,10 +757,10 @@
       <img src="images/IMG_7770.jpeg" alt="Boš? Bom. lastnika">
     </div>
     <div class="about-content">
-      <p class="section-label reveal">// O nas</p>
-      <h2 class="section-title reveal reveal-d1">Ulična hrana.<br>Resno stvar.</h2>
-      <p class="reveal reveal-d2">Smo ekipa kuharjev in ljubiteljev dobre hrane, ki smo se odločili, da streetfood ponesemo na višji nivo. Vsak burger, vsaka pita, vsak zalogaj je narejen z roko, srcem in malo norosti.</p>
-      <p class="reveal reveal-d2">Od porok do festivalov — pripeljemo food truck ali celotno catering ekipo direktno k tebi.</p>
+      <p class="section-label reveal">// O naju</p>
+      <h2 class="section-title reveal reveal-d1">Ulična hrana.<br>Resna štorija.</h2>
+      <p class="reveal reveal-d2">Sva ekipa kuharjev in ljubiteljev dobre hrane, ki sva se odločila, da streetfood poneseva na višji nivo. Vsak burger, vsaka pita, vsak zalogaj je narejen z roko, srcem in malo norosti.</p>
+      <p class="reveal reveal-d2">Od porok do festivalov &mdash; pripeljeva food truck ali celo catering ekipo direktno k vam.</p>
       <div class="about-stats reveal reveal-d3">
         <div>
           <div class="stat-num" data-count="500">0</div>
@@ -788,29 +783,22 @@
 <section id="services">
   <div class="services-header">
     <p class="section-label reveal">// Storitve</p>
-    <h2 class="section-title reveal reveal-d1">Tri načine<br>da te nahranimo.</h2>
+    <h2 class="section-title reveal reveal-d1">Na dva načina<br>vaju nahranimo.</h2>
   </div>
-  <div class="services-grid">
+  <div class="services-grid services-grid--two">
     <div class="service-card reveal">
       <span class="service-num">01</span>
-      <span class="service-icon">🚚</span>
-      <h3 class="service-title">Food Truck</h3>
-      <p class="service-desc">Naš food truck pride k tebi — na parkirišče, dvorišče ali katerikoli prostor. Hitro, okusno, nezaboravno.</p>
-      <a href="#contact" class="service-link">Rezerviraj →</a>
+      <span class="service-icon">&#x1F69A;</span>
+      <h3 class="service-title">Streetfood</h3>
+      <p class="service-desc">Najin food truck pride k vam &mdash; na parkirišče, dvorišče ali festival. Burgerji, ćevapi, tacos, crispy chicken... vse z roko narejeno, vse sveže.</p>
+      <a href="#contact" class="service-link">Rezervirajta &#x2192;</a>
     </div>
     <div class="service-card reveal reveal-d1">
       <span class="service-num">02</span>
-      <span class="service-icon">🍽️</span>
+      <span class="service-icon">&#x1F37D;&#xFE0F;</span>
       <h3 class="service-title">Catering</h3>
-      <p class="service-desc">Poroke, korporativni eventi, zabave — celotna ekipa kuharjev z opremo pride do tebe in pripravi meni po meri.</p>
-      <a href="#contact" class="service-link">Povpraševanje →</a>
-    </div>
-    <div class="service-card reveal reveal-d2">
-      <span class="service-num">03</span>
-      <span class="service-icon">🎡</span>
-      <h3 class="service-title">Karavana okusov</h3>
-      <p class="service-desc">Nastopamo na festivalih in prireditvah po vsej Sloveniji. Preveri kje smo naslednjič in pridi na obisk!</p>
-      <a href="#karavana" class="service-link">Kjer smo →</a>
+      <p class="service-desc">Poroke, korporativni eventi, zabave &mdash; cela ekipa kuharjev z opremo pride k vam in pripravi meni po meri. Za 20 ali 500 gostov.</p>
+      <a href="#contact" class="service-link">Povpraševanje &#x2192;</a>
     </div>
   </div>
 </section>
@@ -819,15 +807,15 @@
 <section id="menu">
   <div class="menu-header">
     <p class="section-label reveal">// Specialitete</p>
-    <h2 class="section-title reveal reveal-d1">Kar delamo,<br>delamo dobro.</h2>
+    <h2 class="section-title reveal reveal-d1">Kar delava,<br>delava dobro.</h2>
   </div>
   <div class="menu-scroll-wrap">
     <div class="menu-track">
       <div class="menu-card">
-        <img src="images/9921.jpeg" alt="Ćevapčiči">
+        <img src="images/9921.jpeg" alt="Cevapčiči">
         <div class="menu-card-body">
           <div class="menu-card-tag">Klasika</div>
-          <div class="menu-card-title">Ćevapčiči</div>
+          <div class="menu-card-title">&#x106;evap&#x10D;i&#x10D;i</div>
         </div>
       </div>
       <div class="menu-card">
@@ -855,22 +843,22 @@
         <img src="images/IMG_7832.jpeg" alt="Krila">
         <div class="menu-card-body">
           <div class="menu-card-tag">BBQ</div>
-          <div class="menu-card-title">Perutničke</div>
+          <div class="menu-card-title">Perutni&#x10D;ke</div>
         </div>
       </div>
       <div class="menu-card">
         <img src="images/1000006911.jpeg" alt="Crispy Chicken">
         <div class="menu-card-body">
           <div class="menu-card-tag">Crispy</div>
-          <div class="menu-card-title">Hrustljav piščanec</div>
+          <div class="menu-card-title">Hrustljav pi&#x161;&#x10D;anec</div>
         </div>
       </div>
       <!-- duplicate for seamless loop -->
       <div class="menu-card">
-        <img src="images/9921.jpeg" alt="Ćevapčiči">
+        <img src="images/9921.jpeg" alt="Cevapčiči">
         <div class="menu-card-body">
           <div class="menu-card-tag">Klasika</div>
-          <div class="menu-card-title">Ćevapčiči</div>
+          <div class="menu-card-title">&#x106;evap&#x10D;i&#x10D;i</div>
         </div>
       </div>
       <div class="menu-card">
@@ -898,14 +886,14 @@
         <img src="images/IMG_7832.jpeg" alt="Krila">
         <div class="menu-card-body">
           <div class="menu-card-tag">BBQ</div>
-          <div class="menu-card-title">Perutničke</div>
+          <div class="menu-card-title">Perutni&#x10D;ke</div>
         </div>
       </div>
       <div class="menu-card">
         <img src="images/1000006911.jpeg" alt="Crispy Chicken">
         <div class="menu-card-body">
           <div class="menu-card-tag">Crispy</div>
-          <div class="menu-card-title">Hrustljav piščanec</div>
+          <div class="menu-card-title">Hrustljav pi&#x161;&#x10D;anec</div>
         </div>
       </div>
     </div>
@@ -928,7 +916,7 @@
       <div class="overlay">Branding</div>
     </div>
     <div class="g-item g3">
-      <img src="images/1573.jpeg" alt="Event sončni zahod">
+      <img src="images/1573.jpeg" alt="Event soncni zahod">
       <div class="overlay">Events</div>
     </div>
     <div class="g-item g4">
@@ -941,7 +929,7 @@
     </div>
     <div class="g-item g6">
       <img src="images/1000011432.jpeg" alt="Lastnika">
-      <div class="overlay">Ekipa</div>
+      <div class="overlay">Midva</div>
     </div>
   </div>
 </section>
@@ -951,8 +939,8 @@
   <div class="karavana-inner">
     <div class="karavana-content">
       <p class="section-label">// Karavana okusov</p>
-      <h2 class="section-title">Kje nas<br>najdeš.</h2>
-      <p>Redno nastopamo na festivalih in prireditvah po vsej Sloveniji. Preveri naš urnik in pridi na obisk — ali pa nas povabi na svojo prireditev!</p>
+      <h2 class="section-title">Kje naju<br>najdeta.</h2>
+      <p>Redno nastopava na festivalih in prireditvah po vsej Sloveniji. Preverita najin urnik in pridita na obisk &mdash; ali pa naju povabita na vajino prireditev!</p>
       <div class="events-list" id="eventsList">
         <div class="events-loading">Nalagam termine...</div>
       </div>
@@ -963,17 +951,45 @@
   </div>
 </section>
 
+<!-- FACEBOOK -->
+<section id="facebook">
+  <div class="fb-inner">
+    <div class="fb-left reveal">
+      <p class="section-label">// Sledita nama</p>
+      <h2 class="section-title">Zadnje<br>iz terena.</h2>
+      <p>Kar se dogaja — objavljava sproti. Pridružita se nama na Facebooku.</p>
+      <a href="https://www.facebook.com/p/Bo%C5%A1-Bom-streetfoodcatering-100063591072955/" target="_blank" rel="noopener" class="btn-outline" style="margin-top:2rem;display:inline-block;">Odpri Facebook &#x2192;</a>
+    </div>
+    <div class="fb-right reveal reveal-d1">
+      <div id="fb-root"></div>
+      <div class="fb-page"
+        data-href="https://www.facebook.com/p/Bo%C5%A1-Bom-streetfoodcatering-100063591072955/"
+        data-tabs="timeline"
+        data-width="500"
+        data-height="500"
+        data-small-header="true"
+        data-adapt-container-width="true"
+        data-hide-cover="false"
+        data-show-facepile="false">
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-grid">
     <div class="contact-left">
       <p class="section-label reveal">// Kontakt</p>
-      <h2 class="section-title reveal reveal-d1">Povej nam<br>kaj potrebuješ.</h2>
-      <p class="reveal reveal-d2">Rezervacija food trucka, ponudba za catering ali pa samo vprašanje — piši nam in odgovorimo v 24h.</p>
+      <h2 class="section-title reveal reveal-d1">Povejta nam<br>kaj rabita.</h2>
+      <p class="reveal reveal-d2">Rezervacija food trucka, ponudba za catering ali pa samo vprašanje &mdash; napišita nama in odgovorimo v 24h.</p>
       <div class="contact-info reveal reveal-d3">
         <div class="contact-info-item">
           <span class="ci-label">Tel</span>
-          <span class="ci-val"><a href="tel:+38640744174">040 744 174</a></span>
+          <span class="ci-val">
+            <a href="tel:+38640744174">040 744 174</a><br>
+            <a href="tel:+38630331896">030 331 896</a>
+          </span>
         </div>
         <div class="contact-info-item">
           <span class="ci-label">Email</span>
@@ -985,7 +1001,7 @@
         </div>
         <div class="contact-info-item">
           <span class="ci-label">Facebook</span>
-          <span class="ci-val"><a href="https://www.facebook.com/p/Bo%C5%A1-Bom-streetfoodcatering-100063591072955/" target="_blank" rel="noopener">Boš? Bom. Streetfood</a></span>
+          <span class="ci-val"><a href="https://www.facebook.com/p/Bo%C5%A1-Bom-streetfoodcatering-100063591072955/" target="_blank" rel="noopener">Bo&#x161;? Bom. Streetfood</a></span>
         </div>
       </div>
     </div>
@@ -1004,11 +1020,10 @@
         <div class="form-group">
           <label>Vrsta povpraševanja</label>
           <select id="f-storitev">
-            <option value="">Izberi storitev...</option>
-            <option>Food Truck rezervacija</option>
-            <option>Catering za prireditev</option>
-            <option>Karavana okusov</option>
-            <option>Drugo</option>
+            <option value="">Izberita storitev...</option>
+              <option>Food Truck rezervacija</option>
+              <option>Catering za prireditev</option>
+              <option>Drugo</option>
           </select>
         </div>
         <div class="form-row">
@@ -1018,15 +1033,24 @@
           </div>
           <div class="form-group">
             <label>Število gostov</label>
-            <input type="text" id="f-gosti" placeholder="npr. 100–200">
+            <select id="f-gosti">
+              <option value="">Izberita obseg...</option>
+              <option>40 – 60</option>
+              <option>60 – 100</option>
+              <option>100 – 150</option>
+              <option>150 – 200</option>
+              <option>200 – 300</option>
+              <option>300 – 500</option>
+              <option>500+</option>
+            </select>
           </div>
         </div>
         <div class="form-group">
           <label>Sporočilo</label>
-          <textarea id="f-sporocilo" placeholder="Opiši prireditev, lokacijo, posebne zahteve..."></textarea>
+          <textarea id="f-sporocilo" placeholder="Opišita prireditev, lokacijo, posebne zahteve..."></textarea>
         </div>
         <div class="form-msg" id="formMsg"></div>
-        <button class="btn-submit" id="btnSubmit" type="button" onclick="submitForm()">Pošlji povpraševanje</button>
+        <button class="btn-submit" id="btnSubmit" type="button" onclick="submitForm()">Pošljita povpraševanje</button>
       </div>
     </div>
   </div>
@@ -1037,24 +1061,23 @@
   <div class="footer-inner">
     <div class="footer-logo">
       <a href="#hero">
-        <img src="images/logobrezozadja.png" alt="Boš? Bom.">
+        <img src="images/logobrezozadja.png" alt="Bo&#x161;? Bom.">
       </a>
     </div>
-    <div class="footer-copy">© 2025 Boš? Bom. Streetfood — Vse pravice pridržane</div>
+    <div class="footer-copy">&copy; 2025 Bo&#x161;? Bom. Streetfood &mdash; Vse pravice pridr&#x17E;ane</div>
     <div class="footer-social">
       <a href="https://www.instagram.com/bosbomstreetfood/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.facebook.com/p/Bo%C5%A1-Bom-streetfoodcatering-100063591072955/" target="_blank" rel="noopener">Facebook</a>
     </div>
     <div class="footer-credit">
       <a href="https://pintsite.si" target="_blank" rel="noopener">Izdelava spletne strani: pintsite.si</a>
-      <span style="color:rgba(136,136,136,0.3);margin:0 0.8rem;">·</span>
+      <span style="color:rgba(136,136,136,0.3);margin:0 0.8rem;">&middot;</span>
       <a href="admin.php">Admin</a>
     </div>
   </div>
 </footer>
 
 <script>
-  // ── CUSTOM CURSOR ──────────────────────────────────────────────
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
   if (cursor && ring && window.matchMedia('(pointer: fine)').matches) {
@@ -1073,7 +1096,6 @@
     });
   }
 
-  // ── HAMBURGER / MOBILE MENU ────────────────────────────────────
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
   let menuOpen = false;
@@ -1089,14 +1111,12 @@
     link.addEventListener('click', () => toggleMenu(false));
   });
 
-  // ── SCROLL REVEAL ──────────────────────────────────────────────
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
   }, { threshold: 0.1 });
   reveals.forEach(r => observer.observe(r));
 
-  // ── COUNT UP ───────────────────────────────────────────────────
   function countUp(el, target, duration = 1800) {
     let start = 0, step = target / (duration / 16);
     const timer = setInterval(() => {
@@ -1118,7 +1138,6 @@
   const statsSection = document.querySelector('.about-stats');
   if (statsSection) statsObs.observe(statsSection);
 
-  // ── NAV HIDE/SHOW ──────────────────────────────────────────────
   let lastScroll = 0;
   const nav = document.getElementById('mainNav');
   window.addEventListener('scroll', () => {
@@ -1130,27 +1149,23 @@
     lastScroll = s;
   });
 
-  // ── DYNAMIC EVENTS ─────────────────────────────────────────────
   const MESECI = ['JAN','FEB','MAR','APR','MAJ','JUN','JUL','AVG','SEP','OKT','NOV','DEC'];
-
   function formatDatum(iso) {
     const d = new Date(iso + 'T00:00:00');
     return MESECI[d.getMonth()] + ' ' + String(d.getDate()).padStart(2, '0');
   }
-
   async function loadEvents() {
     const list = document.getElementById('eventsList');
     const today = new Date(); today.setHours(0,0,0,0);
     try {
       const res = await fetch('get_events.php');
       const events = await res.json();
-      // Filter: samo prihodnji (vključno z danes), sortirano, max 4
       const upcoming = events
         .filter(ev => new Date(ev.datum + 'T00:00:00') >= today)
         .sort((a, b) => a.datum.localeCompare(b.datum))
         .slice(0, 4);
       if (!upcoming.length) {
-        list.innerHTML = '<div class="events-loading">Kmalu objavljamo nove termine.</div>';
+        list.innerHTML = '<div class="events-loading">Kmalu objavljava nove termine.</div>';
         return;
       }
       list.innerHTML = upcoming.map(ev => `
@@ -1160,35 +1175,32 @@
         </div>
       `).join('');
     } catch(e) {
-      list.innerHTML = '<div class="events-loading">Kmalu objavljamo termine.</div>';
+      list.innerHTML = '<div class="events-loading">Kmalu objavljava termine.</div>';
     }
   }
   loadEvents();
 
-  // ── CONTACT FORM ───────────────────────────────────────────────
   async function submitForm() {
     const btn = document.getElementById('btnSubmit');
     const msg = document.getElementById('formMsg');
 
-    const ime      = document.getElementById('f-ime').value.trim();
-    const email    = document.getElementById('f-email').value.trim();
-    const storitev = document.getElementById('f-storitev').value;
-    const datum    = document.getElementById('f-datum').value;
-    const gosti    = document.getElementById('f-gosti').value.trim();
+    const ime       = document.getElementById('f-ime').value.trim();
+    const email     = document.getElementById('f-email').value.trim();
+    const storitev  = document.getElementById('f-storitev').value;
+    const datum     = document.getElementById('f-datum').value;
+    const gosti     = document.getElementById('f-gosti').value.trim();
     const sporocilo = document.getElementById('f-sporocilo').value.trim();
 
-    // Client-side validation
     if (!ime || !email) {
-      showMsg('Prosimo izpolni ime in email.', 'err');
+      showMsg('Prosimo izpolnita ime in email.', 'err');
       return;
     }
     const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRe.test(email)) {
-      showMsg('Vnesi veljaven email naslov.', 'err');
+      showMsg('Vnesite veljaven email naslov.', 'err');
       return;
     }
 
-    // Loading state
     btn.disabled = true;
     btn.classList.add('loading');
     btn.textContent = 'Pošiljam...';
@@ -1210,39 +1222,35 @@
         btn.classList.remove('loading');
         btn.classList.add('success');
         btn.textContent = '✓ Poslano!';
-        showMsg('Hvala! Vaše sporočilo je bilo poslano. Odgovorili bomo v 24h.', 'ok');
-        // Reset form after 3s
+        showMsg('Hvala! Vaše sporočilo je bilo poslano. Odgovorimo v 24h.', 'ok');
         setTimeout(() => {
-          document.getElementById('f-ime').value = '';
-          document.getElementById('f-email').value = '';
-          document.getElementById('f-storitev').value = '';
-          document.getElementById('f-datum').value = '';
-          document.getElementById('f-gosti').value = '';
-          document.getElementById('f-sporocilo').value = '';
+          ['f-ime','f-email','f-storitev','f-datum','f-gosti','f-sporocilo'].forEach(id => {
+            document.getElementById(id).value = '';
+          });
           btn.disabled = false;
           btn.classList.remove('success');
-          btn.textContent = 'Pošlji povpraševanje';
+          btn.textContent = 'Pošljita povpraševanje';
         }, 4000);
       } else {
         btn.classList.remove('loading');
         btn.classList.add('error');
-        btn.textContent = 'Napaka — poskusi znova';
-        showMsg(json.msg || 'Napaka pri pošiljanju. Pokliči nas na 040 744 174.', 'err');
+        btn.textContent = 'Napaka — poskusita znova';
+        showMsg(json.msg || 'Napaka pri pošiljanju. Pokličita naju na 040 744 174.', 'err');
         setTimeout(() => {
           btn.disabled = false;
           btn.classList.remove('error');
-          btn.textContent = 'Pošlji povpraševanje';
+          btn.textContent = 'Pošljita povpraševanje';
         }, 4000);
       }
     } catch(e) {
       btn.classList.remove('loading');
       btn.classList.add('error');
-      btn.textContent = 'Napaka — poskusi znova';
-      showMsg('Napaka pri pošiljanju. Pokliči nas na 040 744 174.', 'err');
+      btn.textContent = 'Napaka — poskusita znova';
+      showMsg('Napaka pri pošiljanju. Pokličita naju na 040 744 174.', 'err');
       setTimeout(() => {
         btn.disabled = false;
         btn.classList.remove('error');
-        btn.textContent = 'Pošlji povpraševanje';
+        btn.textContent = 'Pošljita povpraševanje';
       }, 4000);
     }
   }
@@ -1252,6 +1260,19 @@
     msg.textContent = text;
     msg.className = 'form-msg show ' + type;
   }
+</script>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({ xfbml: true, version: 'v19.0' });
+  };
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/sl_SI/sdk.js#xfbml=1&version=v19.0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 </script>
 </body>
 </html>
