@@ -486,15 +486,16 @@
   .fb-left .section-title { color: var(--off-white); margin-bottom: 1.2rem; }
   .fb-left p { color: #999; font-size: 1rem; line-height: 1.75; font-weight: 300; }
   .fb-right {
-    display: flex; justify-content: center;
+    display: flex; justify-content: center; align-items: flex-start;
     background: rgba(255,255,255,0.03);
     border: 1px solid rgba(255,255,255,0.06);
     padding: 1.5rem;
     min-height: 300px;
+    overflow: hidden;
   }
-  @media (max-width: 768px) {
-    .fb-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-    .fb-right { padding: 1rem; }
+  .fb-right .fb-page, .fb-right iframe {
+    max-width: 100% !important;
+    width: 100% !important;
   }
 
   /* CONTACT */
@@ -612,12 +613,14 @@
   }
 
   @media (max-width: 768px) {
+    /* NAV */
     nav { padding: 1.1rem 1.5rem; }
     .nav-logo img { height: 42px; }
     .nav-links { display: none; }
     .hamburger { display: flex; }
     .mobile-menu { display: flex; }
 
+    /* HERO */
     #hero { padding: 6rem 1.5rem 3.5rem; min-height: 100svh; }
     .hero-logo-main img { height: clamp(80px, 35vw, 140px); }
     .hero-sub { font-size: 0.95rem; max-width: 100%; }
@@ -625,6 +628,7 @@
     .btn-primary, .btn-outline { text-align: center; width: 100%; max-width: 280px; }
     .hero-scroll { display: none !important; }
 
+    /* ABOUT */
     #about { padding: 4.5rem 1.5rem; }
     .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .about-img-wrap { aspect-ratio: 16/9; }
@@ -632,32 +636,53 @@
     .about-stats { gap: 1.5rem; }
     .stat-num { font-size: 2.2rem; }
 
+    /* SERVICES */
     #services { padding: 4.5rem 1.5rem; }
     .services-grid { grid-template-columns: 1fr; border: none; gap: 1px; }
+    .services-grid--two { grid-template-columns: 1fr; }
     .service-card { padding: 2.5rem 2rem; }
 
+    /* MENU */
     #menu { padding: 4.5rem 0; }
     .menu-header { padding: 0 1.5rem; }
     .menu-track { padding: 0 1.5rem; }
-    .menu-card { width: 220px; }
-    .menu-card img { height: 160px; }
+    .menu-card { width: 200px; }
+    .menu-card img { height: 200px; }
 
+    /* GALLERY */
     #gallery { padding: 4.5rem 1.5rem; }
     .gallery-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
     .g1 { grid-column: span 2; grid-row: span 1; min-height: 220px; }
     .g2, .g3 { grid-column: span 1; min-height: 160px; }
     .g4, .g5, .g6 { grid-column: span 1; min-height: 140px; }
 
+    /* KARAVANA */
     #karavana { padding: 4.5rem 1.5rem; }
     #karavana::before { font-size: 5rem; }
     .karavana-inner { grid-template-columns: 1fr; gap: 2.5rem; }
     .karavana-img { order: -1; }
 
+    /* FACEBOOK */
+    #facebook { padding: 4.5rem 1.5rem; }
+    .fb-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .fb-right {
+      padding: 0.5rem;
+      border: 1px solid rgba(255,255,255,0.06);
+      display: flex; justify-content: center;
+      overflow: hidden;
+    }
+    .fb-right .fb-page span, .fb-right iframe {
+      width: 100% !important;
+      min-width: unset !important;
+    }
+
+    /* CONTACT */
     #contact { padding: 4.5rem 1.5rem; }
     .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
     .form-row { grid-template-columns: 1fr; }
     .btn-submit { width: 100%; align-self: stretch; clip-path: none; }
 
+    /* FOOTER */
     footer { padding: 2rem 1.5rem; }
     .footer-inner { flex-direction: column; text-align: center; align-items: center; }
     .footer-social { justify-content: center; }
@@ -682,7 +707,7 @@
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Zapri meni">&#x2715;</button>
   <ul>
-    <li><a href="#about" class="mobile-nav-link">O nama</a></li>
+    <li><a href="#about" class="mobile-nav-link">O naju</a></li>
     <li><a href="#services" class="mobile-nav-link">Storitve</a></li>
     <li><a href="#menu" class="mobile-nav-link">Meni</a></li>
     <li><a href="#gallery" class="mobile-nav-link">Galerija</a></li>
@@ -701,7 +726,7 @@
     <img src="images/logobrezozadja.png" alt="Boš? Bom.">
   </a>
   <ul class="nav-links">
-    <li><a href="#about">O nama</a></li>
+    <li><a href="#about">O naju</a></li>
     <li><a href="#services">Storitve</a></li>
     <li><a href="#menu">Meni</a></li>
     <li><a href="#gallery">Galerija</a></li>
@@ -755,9 +780,9 @@
       <img src="images/IMG_7770.jpeg" alt="Boš? Bom. lastnika">
     </div>
     <div class="about-content">
-      <p class="section-label reveal">// O nama</p>
+      <p class="section-label reveal">// O naju</p>
       <h2 class="section-title reveal reveal-d1">Ulična hrana.<br>Resna štorija.</h2>
-      <p class="reveal reveal-d2">Sva mož in žena ter ljubitelja dobre hrane, ki sva se odločila, da streetfood poneseva na višji nivo. Vsak burger, vsaka pita, vsak zalogaj je narejen z roko, srcem in malo norosti.</p>
+      <p class="reveal reveal-d2">Sva ekipa kuharjev in ljubiteljev dobre hrane, ki sva se odločila, da streetfood poneseva na višji nivo. Vsak burger, vsaka pita, vsak zalogaj je narejen z roko, srcem in malo norosti.</p>
       <p class="reveal reveal-d2">Od porok do festivalov &mdash; pripeljeva food truck ali celo catering ekipo direktno k vam.</p>
       <div class="about-stats reveal reveal-d3">
         <div>
@@ -788,15 +813,15 @@
       <span class="service-num">01</span>
       <span class="service-icon">&#x1F69A;</span>
       <h3 class="service-title">Streetfood</h3>
-      <p class="service-desc">Najin food truck pride k vam &mdash; na parkirišče, dvorišče ali festival. Burgerji, čevapi, tacos, crispy chicken... vse narejeno z roko, vse sveže.</p>
-      <a href="#contact" class="service-link">Rezervirajte &#x2192;</a>
+      <p class="service-desc">Najin food truck pride k vam &mdash; na parkirišče, dvorišče ali festival. Burgerji, ćevapi, tacos, crispy chicken... vse z roko narejeno, vse sveže.</p>
+      <a href="#contact" class="service-link">Rezervirajta &#x2192;</a>
     </div>
     <div class="service-card reveal reveal-d1">
       <span class="service-num">02</span>
       <span class="service-icon">&#x1F37D;&#xFE0F;</span>
       <h3 class="service-title">Catering</h3>
-      <p class="service-desc">Poroke, korporativni eventi, zabave &mdash; cela ekipa kuharjev z opremo pride k vam in pripravi meni po meri. Pogoj za catering je vsaj 40 gostov.</p>
-      <a href="#contact" class="service-link">Rezervirajte &#x2192;</a>
+      <p class="service-desc">Poroke, korporativni eventi, zabave &mdash; cela ekipa kuharjev z opremo pride k vam in pripravi meni po meri. Za 20 ali 500 gostov.</p>
+      <a href="#contact" class="service-link">Povpraševanje &#x2192;</a>
     </div>
   </div>
 </section>
@@ -936,9 +961,9 @@
 <section id="karavana">
   <div class="karavana-inner">
     <div class="karavana-content">
-      <p class="section-label">// Lokacije dogodkov</p>
-      <h2 class="section-title">Kje naju<br>najdete.</h2>
-      <p>Redno nastopava na festivalih in prireditvah po vsej Sloveniji. Preverite najin urnik in pridite na obisk &mdash; ali pa naju povabite na vašo prireditev!</p>
+      <p class="section-label">// Karavana okusov</p>
+      <h2 class="section-title">Kje naju<br>najdeta.</h2>
+      <p>Redno nastopava na festivalih in prireditvah po vsej Sloveniji. Preverita najin urnik in pridita na obisk &mdash; ali pa naju povabita na vajino prireditev!</p>
       <div class="events-list" id="eventsList">
         <div class="events-loading">Nalagam termine...</div>
       </div>
@@ -955,7 +980,7 @@
     <div class="fb-left reveal">
       <p class="section-label">// Sledita nama</p>
       <h2 class="section-title">Zadnje<br>iz terena.</h2>
-      <p>Kar se dogaja — objavljava sproti. Pridružite se nama na Facebooku.</p>
+      <p>Kar se dogaja — objavljava sproti. Pridružita se nama na Facebooku.</p>
       <a href="https://www.facebook.com/p/Bo%C5%A1-Bom-streetfoodcatering-100063591072955/" target="_blank" rel="noopener" class="btn-outline" style="margin-top:2rem;display:inline-block;">Odpri Facebook &#x2192;</a>
     </div>
     <div class="fb-right reveal reveal-d1">
@@ -1271,6 +1296,19 @@
     js.src = "https://connect.facebook.net/sl_SI/sdk.js#xfbml=1&version=v19.0";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
+
+  // Nastavi širino FB widgeta glede na container
+  function setFbWidth() {
+    const fbRight = document.querySelector('.fb-right');
+    const fbPage = document.querySelector('.fb-page');
+    if (fbRight && fbPage) {
+      const w = Math.min(fbRight.offsetWidth - 32, 500);
+      fbPage.setAttribute('data-width', w);
+      if (window.FB) FB.XFBML.parse();
+    }
+  }
+  window.addEventListener('load', setFbWidth);
+  window.addEventListener('resize', setFbWidth);
 </script>
 </body>
 </html>
