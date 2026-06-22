@@ -696,12 +696,72 @@
     .gallery-grid { grid-template-columns: 1fr; }
     .g1, .g2, .g3, .g4, .g5, .g6 { grid-column: span 1; min-height: 200px; }
   }
+  /* LIGHTBOX */
+  .lightbox-overlay {
+    position: fixed; inset: 0; z-index: 9000;
+    background: rgba(0,0,0,0.96);
+    display: none; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .lightbox-overlay.active { display: flex; }
+  .lightbox-overlay.visible { opacity: 1; }
+  .lightbox-img-wrap {
+    position: relative; max-width: 90vw; max-height: 88vh;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lightbox-img-wrap img {
+    max-width: 90vw; max-height: 85vh;
+    object-fit: contain;
+    transition: opacity 0.2s;
+  }
+  .lightbox-close {
+    position: fixed; top: 1.5rem; right: 1.5rem;
+    width: 48px; height: 48px; border-radius: 50%;
+    background: none; border: 1.5px solid rgba(255,255,255,0.3);
+    color: #fff; font-size: 1.2rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.2s, background 0.2s;
+    z-index: 9001;
+  }
+  .lightbox-close:hover { border-color: var(--red); background: rgba(200,16,46,0.2); }
+  .lightbox-prev, .lightbox-next {
+    position: fixed; top: 50%; transform: translateY(-50%);
+    width: 52px; height: 52px; border-radius: 50%;
+    background: none; border: 1.5px solid rgba(255,255,255,0.3);
+    color: #fff; font-size: 1.3rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.2s, background 0.2s;
+    z-index: 9001;
+  }
+  .lightbox-prev { left: 1.5rem; }
+  .lightbox-next { right: 1.5rem; }
+  .lightbox-prev:hover, .lightbox-next:hover { border-color: var(--red); background: rgba(200,16,46,0.2); }
+  .lightbox-counter {
+    position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+    font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.5); z-index: 9001;
+  }
+  @media (max-width: 768px) {
+    .lightbox-prev { left: 0.5rem; }
+    .lightbox-next { right: 0.5rem; }
+  }
 </style>
 </head>
 <body>
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox">
+  <button class="lightbox-close" id="lbClose">&#x2715;</button>
+  <button class="lightbox-prev" id="lbPrev">&#x2190;</button>
+  <div class="lightbox-img-wrap">
+    <img id="lbImg" src="" alt="">
+  </div>
+  <button class="lightbox-next" id="lbNext">&#x2192;</button>
+  <div class="lightbox-counter" id="lbCounter"></div>
+</div>
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
@@ -836,91 +896,29 @@
   </div>
   <div class="menu-scroll-wrap">
     <div class="menu-track">
-      <div class="menu-card">
-        <img src="images/9921.jpeg" alt="Cevapčiči">
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Klasika</div>
-          <div class="menu-card-title">&#x106;evap&#x10D;i&#x10D;i</div>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="images/14130.jpeg" alt="Burger">
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Signature</div>
-          <div class="menu-card-title">Bom Burger</div>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="images/IMG_7828.jpeg" alt="Tacos">
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Meksika</div>
-          <div class="menu-card-title">Street Tacos</div>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="images/IMG_7829.jpeg" alt="Burrito">
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Wrap</div>
-          <div class="menu-card-title">Burrito</div>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="images/IMG_7832.jpeg" alt="Krila">
-        <div class="menu-card-body">
-          <div class="menu-card-tag">BBQ</div>
-          <div class="menu-card-title">Perutni&#x10D;ke</div>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="images/1000006911.jpeg" alt="Crispy Chicken">
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Crispy</div>
-          <div class="menu-card-title">Hrustljav pi&#x161;&#x10D;anec</div>
-        </div>
-      </div>
+      <div class="menu-card"><img src="images/9921.jpeg" alt=""><div class="menu-card-body"></div></div>
+      <div class="menu-card"><img src="images/14130.jpeg" alt=""><div class="menu-card-body"></div></div>
+      <div class="menu-card"><img src="images/IMG_7832.jpeg" alt=""><div class="menu-card-body"></div></div>
+      <div class="menu-card"><img src="images/1000006911.jpeg" alt=""><div class="menu-card-body"></div></div>
+      <div class="menu-card"><img src="images/slika1.jpg" alt=""><div class="menu-card-body"></div></div>
+      <div class="menu-card"><img src="images/slika3.jpg" alt=""><div class="menu-card-body"></div></div>
+      <div class="menu-card"><img src="images/slika6.jpg" alt=""><div class="menu-card-body"></div></div>
+      <div class="menu-card"><img src="images/slika7.jpg" alt=""><div class="menu-card-body"></div></div>
+      <div class="menu-card"><img src="images/slika8.jpg" alt=""><div class="menu-card-body"></div></div>
+      <div class="menu-card"><img src="images/slika9.jpg" alt=""><div class="menu-card-body"></div></div>
+      <div class="menu-card"><img src="images/slika10.jpg" alt=""><div class="menu-card-body"></div></div>
       <!-- duplicate for seamless loop -->
-      <div class="menu-card">
-        <img src="images/9921.jpeg" alt="Cevapčiči">
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Klasika</div>
-          <div class="menu-card-title">&#x106;evap&#x10D;i&#x10D;i</div>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="images/14130.jpeg" alt="Burger">
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Signature</div>
-          <div class="menu-card-title">Bom Burger</div>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="images/IMG_7828.jpeg" alt="Tacos">
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Meksika</div>
-          <div class="menu-card-title">Street Tacos</div>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="images/IMG_7829.jpeg" alt="Burrito">
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Wrap</div>
-          <div class="menu-card-title">Burrito</div>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="images/IMG_7832.jpeg" alt="Krila">
-        <div class="menu-card-body">
-          <div class="menu-card-tag">BBQ</div>
-          <div class="menu-card-title">Perutni&#x10D;ke</div>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="images/1000006911.jpeg" alt="Crispy Chicken">
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Crispy</div>
-          <div class="menu-card-title">Hrustljav pi&#x161;&#x10D;anec</div>
-        </div>
-      </div>
+      <div class="menu-card"><img src="images/9921.jpeg" alt=""><div class="menu-card-body"></div></div>
+      <div class="menu-card"><img src="images/14130.jpeg" alt=""><div class="menu-card-body"></div></div>
+      <div class="menu-card"><img src="images/IMG_7832.jpeg" alt=""><div class="menu-card-body"></div></div>
+      <div class="menu-card"><img src="images/1000006911.jpeg" alt=""><div class="menu-card-body"></div></div>
+      <div class="menu-card"><img src="images/slika1.jpg" alt=""><div class="menu-card-body"></div></div>
+      <div class="menu-card"><img src="images/slika3.jpg" alt=""><div class="menu-card-body"></div></div>
+      <div class="menu-card"><img src="images/slika6.jpg" alt=""><div class="menu-card-body"></div></div>
+      <div class="menu-card"><img src="images/slika7.jpg" alt=""><div class="menu-card-body"></div></div>
+      <div class="menu-card"><img src="images/slika8.jpg" alt=""><div class="menu-card-body"></div></div>
+      <div class="menu-card"><img src="images/slika9.jpg" alt=""><div class="menu-card-body"></div></div>
+      <div class="menu-card"><img src="images/slika10.jpg" alt=""><div class="menu-card-body"></div></div>
     </div>
   </div>
 </section>
@@ -932,29 +930,41 @@
     <h2 class="section-title reveal reveal-d1">V akciji.</h2>
   </div>
   <div class="gallery-grid reveal">
-    <div class="g-item g1">
+    <div class="g-item g1" data-lightbox="images/1552.jpeg">
       <img src="images/1552.jpeg" alt="Food truck catering">
       <div class="overlay">Food Truck</div>
     </div>
-    <div class="g-item g2">
+    <div class="g-item g2" data-lightbox="images/1000009460.jpeg">
       <img src="images/1000009460.jpeg" alt="Food truck logo">
       <div class="overlay">Branding</div>
     </div>
-    <div class="g-item g3">
+    <div class="g-item g3" data-lightbox="images/1573.jpeg">
       <img src="images/1573.jpeg" alt="Event soncni zahod">
       <div class="overlay">Events</div>
     </div>
-    <div class="g-item g4">
+    <div class="g-item g4" data-lightbox="images/IMG_8473.jpeg">
       <img src="images/IMG_8473.jpeg" alt="Spread jedi">
       <div class="overlay">Hrana</div>
     </div>
-    <div class="g-item g5">
+    <div class="g-item g5" data-lightbox="images/1568.jpeg">
       <img src="images/1568.jpeg" alt="Catering setup">
       <div class="overlay">Catering</div>
     </div>
-    <div class="g-item g6">
+    <div class="g-item g6" data-lightbox="images/1000011432.jpeg">
       <img src="images/1000011432.jpeg" alt="Lastnika">
       <div class="overlay">Midva</div>
+    </div>
+    <div class="g-item g4" data-lightbox="images/slika2.jpg">
+      <img src="images/slika2.jpg" alt="">
+      <div class="overlay">Galerija</div>
+    </div>
+    <div class="g-item g4" data-lightbox="images/ozadje.jpg">
+      <img src="images/ozadje.jpg" alt="">
+      <div class="overlay">Galerija</div>
+    </div>
+    <div class="g-item g4" data-lightbox="images/slika5.jpg">
+      <img src="images/slika5.jpg" alt="">
+      <div class="overlay">Galerija</div>
     </div>
   </div>
 </section>
@@ -1285,6 +1295,88 @@
     msg.textContent = text;
     msg.className = 'form-msg show ' + type;
   }
+  const allLightboxImages = [
+    'images/ozadje.jpg',
+    'images/1552.jpeg',
+    'images/1000009460.jpeg',
+    'images/1573.jpeg',
+    'images/IMG_8473.jpeg',
+    'images/1568.jpeg',
+    'images/1000011432.jpeg',
+    'images/slika1.jpg',
+    'images/slika2.jpg',
+    'images/slika3.jpg',
+    'images/slika5.jpg',
+    'images/slika6.jpg',
+    'images/slika7.jpg',
+    'images/slika8.jpg',
+    'images/slika9.jpg',
+    'images/slika10.jpg',
+    'images/9921.jpeg',
+    'images/14130.jpeg',
+    'images/IMG_7832.jpeg',
+    'images/1000006911.jpeg',
+    'images/IMG_7770.jpeg',
+    'images/13891.jpeg',
+  ];
+
+  let lbIndex = 0;
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCounter = document.getElementById('lbCounter');
+
+  function lbOpen(src) {
+    lbIndex = allLightboxImages.indexOf(src);
+    if (lbIndex === -1) lbIndex = 0;
+    lbImg.src = allLightboxImages[lbIndex];
+    lbCounter.textContent = (lbIndex + 1) + ' / ' + allLightboxImages.length;
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => lb.classList.add('visible'));
+  }
+
+  function lbClose() {
+    lb.classList.remove('visible');
+    setTimeout(() => { lb.classList.remove('active'); document.body.style.overflow = ''; }, 300);
+  }
+
+  function lbGo(dir) {
+    lbIndex = (lbIndex + dir + allLightboxImages.length) % allLightboxImages.length;
+    lbImg.style.opacity = '0';
+    setTimeout(() => {
+      lbImg.src = allLightboxImages[lbIndex];
+      lbImg.style.opacity = '1';
+      lbCounter.textContent = (lbIndex + 1) + ' / ' + allLightboxImages.length;
+    }, 150);
+  }
+
+  document.getElementById('lbClose').addEventListener('click', lbClose);
+  document.getElementById('lbPrev').addEventListener('click', () => lbGo(-1));
+  document.getElementById('lbNext').addEventListener('click', () => lbGo(1));
+  lb.addEventListener('click', e => { if (e.target === lb) lbClose(); });
+
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'ArrowRight') lbGo(1);
+    if (e.key === 'ArrowLeft') lbGo(-1);
+    if (e.key === 'Escape') lbClose();
+  });
+
+  // Touch swipe
+  let lbTouchX = 0;
+  lb.addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => {
+    const diff = lbTouchX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) lbGo(diff > 0 ? 1 : -1);
+  });
+
+  // Odpri lightbox na klik na vsak g-item
+  document.querySelectorAll('.g-item[data-lightbox]').forEach(el => {
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', () => lbOpen(el.dataset.lightbox));
+  });
+
+
 </script>
 
 <script>
