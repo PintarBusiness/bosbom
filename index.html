@@ -398,6 +398,18 @@
   }
   .gallery-header { max-width: 1100px; margin: 0 auto 3.5rem; }
   .gallery-header .section-title { color: var(--off-white); }
+  .gallery-tabs {
+    max-width: 1100px; margin: 0 auto 2.5rem;
+    display: flex; gap: 0.6rem; flex-wrap: wrap;
+  }
+  .gallery-tab {
+    background: transparent; border: 1.5px solid rgba(255,255,255,0.15);
+    color: var(--grey); font-family: var(--font-mono); font-size: 0.68rem;
+    letter-spacing: 0.14em; text-transform: uppercase; padding: 0.75rem 1.5rem;
+    cursor: pointer; transition: all 0.25s ease; -webkit-tap-highlight-color: transparent;
+  }
+  .gallery-tab:hover { border-color: rgba(255,255,255,0.4); color: var(--off-white); }
+  .gallery-tab.active { background: var(--red); border-color: var(--red); color: #fff; }
   .gallery-grid {
     max-width: 1100px; margin: 0 auto;
     display: grid;
@@ -405,7 +417,8 @@
     grid-template-rows: auto;
     gap: 0.8rem;
   }
-  .g-item { overflow: hidden; position: relative; }
+  .g-item { overflow: hidden; position: relative; transition: opacity 0.25s ease; }
+  .g-item.g-hidden { display: none; }
   .g-item img {
     width: 100%; height: 100%; object-fit: cover; display: block;
     transition: transform 0.5s ease, filter 0.4s;
@@ -651,6 +664,8 @@
 
     /* GALLERY */
     #gallery { padding: 4.5rem 1.5rem; }
+    .gallery-tabs { gap: 0.4rem; margin-bottom: 2rem; }
+    .gallery-tab { padding: 0.6rem 1.1rem; font-size: 0.62rem; flex: 1 1 auto; text-align: center; }
     .gallery-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
     .g1 { grid-column: span 2; grid-row: span 1; min-height: 220px; }
     .g2, .g3 { grid-column: span 1; min-height: 160px; }
@@ -788,7 +803,7 @@
     <img src="images/logobrezozadja.png" alt="Boš? Bom.">
   </a>
   <ul class="nav-links">
-    <li><a href="#about">O nama</a></li>
+    <li><a href="#about">O naju</a></li>
     <li><a href="#services">Storitve</a></li>
     <li><a href="#menu">Galerija</a></li>
     <li><a href="#karavana">Kje se nahajava</a></li>
@@ -806,7 +821,7 @@
   <div class="hero-logo-main">
     <img src="images/logobrezozadja.png" alt="Boš? Bom.">
   </div>
-  <p class="hero-sub">Ulična hrana z dušo &mdash; za vašo prireditev, korporativni event ali festival.</p>
+  <p class="hero-sub">Hej, dobrodošli pri nas! &mdash; za vašo prireditev, korporativni event ali festival.</p>
   <div class="hero-cta">
     <a href="#contact" class="btn-primary">Naročite catering</a>
     <a href="#services" class="btn-outline">Kaj ponujava</a>
@@ -842,10 +857,14 @@
       <img src="images/IMG_7770.jpeg" alt="Boš? Bom. lastnika">
     </div>
     <div class="about-content">
-      <p class="section-label reveal">// O nama</p>
-      <h2 class="section-title reveal reveal-d1">Ulična hrana.<br>Resna štorija.</h2>
-      <p class="reveal reveal-d2">Sva mož in žena ter ljubitelja dobre hrane, ki sva se odločila, da streetfood poneseva na višji nivo. Vsak burger, vsaka pita, vsak zalogaj je narejen z roko, srcem in malo norosti.</p>
-      <p class="reveal reveal-d2">Od porok do festivalov &mdash; pripeljeva food truck ali celo catering ekipo direktno k vam.</p>
+      <p class="section-label reveal">// O naju</p>
+      <h2 class="section-title reveal reveal-d1">Za imenom <br> BOŠ?BOM!<br>Stojiva midva</h2>
+      <p class="reveal reveal-d2">Sva mož in žena, ki sva iz ljubezni do hrane in dela z ljudmi ustvarila svojo zgodbo.
+Začelo se je z idejo, da ljudem ponudiva nekaj preprostega, domačega in predvsem dobrega.
+Pri svojem delu nama je najbolj pomembno, da so najini gostje zadovoljni.</p>
+      <p class="reveal reveal-d2">Želiva, da je hrana  sveža, okusna in pripravljena tako, kot bi jo postregla svojim najbližjim.
+Danes naju lahko srečate na raznih streetfood dogodkih, sejmih, zasebnih praznovanjih in prireditvah.
+Verjameva, da dobra hrana povezuje ljudi.</p>
       <div class="about-stats reveal reveal-d3">
         <div>
           <div class="stat-num" data-count="500">0</div>
@@ -856,8 +875,8 @@
           <div class="stat-label">Let izkušenj</div>
         </div>
         <div>
-          <div class="stat-num" data-count="30">0</div>
-          <div class="stat-label">Jedi v meniju</div>
+          <div class="stat-num" >∞</div>
+          <div class="stat-label">Ljubezni do hrane</div>
         </div>
       </div>
     </div>
@@ -868,22 +887,28 @@
 <section id="services">
   <div class="services-header">
     <p class="section-label reveal">// Storitve</p>
-    <h2 class="section-title reveal reveal-d1">Na dva načina<br>vas nahraniva.</h2>
+    
   </div>
   <div class="services-grid services-grid--two">
     <div class="service-card reveal">
       <span class="service-num">01</span>
-      <span class="service-icon">&#x1F69A;</span>
-      <h3 class="service-title">Streetfood</h3>
-      <p class="service-desc">Najin food truck pride k vam &mdash; na parkirišče, dvorišče ali festival. Burgerji, čevapi, tacos, crispy chicken... vse sveže narejeno z roko.</p>
-      <a href="#contact" class="service-link">Rezervirajte &#x2192;</a>
+      <span class="service-icon">&#x1F37D;&#xFE0F;</span>
+      <h3 class="service-title">Catering</h3>
+      <h3 class="service-title">Vi praznujete - midva poskrbiva za hrano.</h3>
+      <p class="service-desc">Organiziraš rojstni dan, poroko, obletnico, piknik, poslovni dogodek ali drugo praznovanje?
+Na vaš dogodek se pripeljeva z najinim foodtruckom in vam vso hrano pripraviva na kraju dogodka.
+Ponudbo prilagodiva vsaki priložnosti.
+Delava za minimalno 40 oseb.</p>
+      <a href="#contact" class="service-link">Pošlji povpraševanje &#x2192;</a>
     </div>
     <div class="service-card reveal reveal-d1">
       <span class="service-num">02</span>
-      <span class="service-icon">&#x1F37D;&#xFE0F;</span>
-      <h3 class="service-title">Catering</h3>
-      <p class="service-desc">Poroke, korporativni eventi, zabave &mdash; cela ekipa kuharjev z opremo pride k vam in pripravi meni po meri. Pogoj je vsaj 40 gostov.</p>
-      <a href="#contact" class="service-link">Povpraševanje &#x2192;</a>
+      <span class="service-icon">&#x1F69A;</span>
+      <h3 class="service-title">Streetfood dogodki</h3>
+      <h3 class="service-title">Ko zadiši po ulici, veš, da se nekaj dobrega kuha.</h3>
+      <p class="service-desc">Sodelujeva na raznih festivalih, sejmih in mestnih dogodkih.
+Če organiziraš dogodek in iščeš foodtruck, ki bo gostom ponudil dobro hrano in prijetno izkušnjo, se z veseljem pridruživa.</p>
+      <a href="#contact" class="service-link">Kontaktiraj &#x2192;</a>
     </div>
   </div>
 </section>
@@ -929,43 +954,93 @@
     <p class="section-label reveal">// Galerija</p>
     <h2 class="section-title reveal reveal-d1">V akciji.</h2>
   </div>
-  <div class="gallery-grid reveal">
-    <div class="g-item g1" data-lightbox="images/1552.jpeg">
+
+  <div class="gallery-tabs reveal">
+    <button class="gallery-tab active" data-cat="catering">Catering</button>
+    <button class="gallery-tab" data-cat="streetfood">Streetfood dogodki</button>
+    <button class="gallery-tab" data-cat="sejmi">Sejmi</button>
+  </div>
+
+  <div class="gallery-grid reveal" id="galleryGrid">
+
+    <!-- CATERING -->
+    <div class="g-item g1" data-cat="catering" data-lightbox="images/1552.jpeg">
       <img src="images/1552.jpeg" alt="Food truck catering">
       <div class="overlay">Food Truck</div>
     </div>
-    <div class="g-item g2" data-lightbox="images/1000009460.jpeg">
-      <img src="images/1000009460.jpeg" alt="Food truck logo">
-      <div class="overlay">Branding</div>
-    </div>
-    <div class="g-item g3" data-lightbox="images/1573.jpeg">
-      <img src="images/1573.jpeg" alt="Event soncni zahod">
-      <div class="overlay">Events</div>
-    </div>
-    <div class="g-item g4" data-lightbox="images/IMG_8473.jpeg">
-      <img src="images/IMG_8473.jpeg" alt="Spread jedi">
-      <div class="overlay">Hrana</div>
-    </div>
-    <div class="g-item g5" data-lightbox="images/1568.jpeg">
+    <div class="g-item g2" data-cat="catering" data-lightbox="images/1568.jpeg">
       <img src="images/1568.jpeg" alt="Catering setup">
       <div class="overlay">Catering</div>
     </div>
-    <div class="g-item g6" data-lightbox="images/1000011432.jpeg">
-      <img src="images/1000011432.jpeg" alt="Lastnika">
-      <div class="overlay">Midva</div>
+    <div class="g-item g3" data-cat="catering" data-lightbox="images/IMG_8473.jpeg">
+      <img src="images/IMG_8473.jpeg" alt="Spread jedi">
+      <div class="overlay">Postavitev</div>
     </div>
-    <div class="g-item g4" data-lightbox="images/slika2.jpg">
-      <img src="images/slika2.jpg" alt="">
-      <div class="overlay">Galerija</div>
+    <div class="g-item g4" data-cat="catering" data-lightbox="images/1000011432.jpeg">
+      <img src="images/slika2.jpg" alt="Lastnika">
+      <div class="overlay">Dogodek</div>
     </div>
-    <div class="g-item g4" data-lightbox="images/ozadje.jpg">
-      <img src="images/ozadje.jpg" alt="">
-      <div class="overlay">Galerija</div>
+    <div class="g-item g5" data-cat="catering" data-lightbox="images/13891.jpeg">
+      <img src="images/13891.jpeg" alt="Karavana okusov outdoor setup">
+      <div class="overlay">Setup</div>
     </div>
-    <div class="g-item g4" data-lightbox="images/slika5.jpg">
-      <img src="images/slika5.jpg" alt="">
-      <div class="overlay">Galerija</div>
+    <div class="g-item g6" data-cat="catering" data-lightbox="images/1000009460.jpeg">
+      <img src="images/1573.jpeg" alt="Food truck logo">
+      <div class="overlay">Branding</div>
     </div>
+
+    <!-- STREETFOOD DOGODKI -->
+    <div class="g-item g1 g-hidden" data-cat="streetfood" data-lightbox="images/1573.jpeg">
+      <img src="images/unnamed (1).jpg" alt="Streetfood dogodek">
+      <div class="overlay">Dogodek</div>
+    </div>
+    <div class="g-item g2 g-hidden" data-cat="streetfood" data-lightbox="images/9921.jpeg">
+      <img src="images/IMG_7828.jpeg" alt="Streetfood specialiteta">
+      <div class="overlay">Streetfood</div>
+    </div>
+    <div class="g-item g3 g-hidden" data-cat="streetfood" data-lightbox="images/14130.jpeg">
+      <img src="images/IMG_7829.jpeg" alt="Streetfood specialiteta">
+      <div class="overlay">Streetfood</div>
+    </div>
+    <div class="g-item g4 g-hidden" data-cat="streetfood" data-lightbox="images/IMG_7832.jpeg">
+      <img src="images/IMG_7832.jpeg" alt="Streetfood specialiteta">
+      <div class="overlay">Streetfood</div>
+    </div>
+    <div class="g-item g5 g-hidden" data-cat="streetfood" data-lightbox="images/1000006911.jpeg">
+      <img src="images/1000006911.jpeg" alt="Streetfood specialiteta">
+      <div class="overlay">Streetfood</div>
+    </div>
+    <div class="g-item g6 g-hidden" data-cat="streetfood" data-lightbox="images/slika1.jpg">
+      <img src="images/karavana.webp" alt="Streetfood specialiteta">
+      <div class="overlay">Kravana okusov</div>
+    </div>
+
+    <!-- SEJMI -->
+    <div class="g-item g1 g-hidden" data-cat="sejmi" data-lightbox="images/slika2.jpg">
+      <img src="images/9921.jpeg" alt="Sejem">
+      <div class="overlay">Sejem</div>
+    </div>
+    <div class="g-item g2 g-hidden" data-cat="sejmi" data-lightbox="images/slika5.jpg">
+      <img src="images/slika5.jpg" alt="Sejem">
+      <div class="overlay">Sejem</div>
+    </div>
+    <div class="g-item g3 g-hidden" data-cat="sejmi" data-lightbox="images/ozadje.jpg">
+      <img src="images/ozadje.jpg" alt="Sejem">
+      <div class="overlay">Sejem</div>
+    </div>
+    <div class="g-item g4 g-hidden" data-cat="sejmi" data-lightbox="images/slika6.jpg">
+      <img src="images/14130.jpeg" alt="Sejem">
+      <div class="overlay">Sejem</div>
+    </div>
+    <div class="g-item g5 g-hidden" data-cat="sejmi" data-lightbox="images/slika7.jpg">
+      <img src="images/14125.jpeg" alt="Sejem">
+      <div class="overlay">Sejem</div>
+    </div>
+    <div class="g-item g6 g-hidden" data-cat="sejmi" data-lightbox="images/slika8.jpg">
+      <img src="images/slika8.jpg" alt="Sejem">
+      <div class="overlay">Sejem</div>
+    </div>
+
   </div>
 </section>
 
@@ -1295,41 +1370,38 @@
     msg.textContent = text;
     msg.className = 'form-msg show ' + type;
   }
-  const allLightboxImages = [
-    'images/ozadje.jpg',
-    'images/1552.jpeg',
-    'images/1000009460.jpeg',
-    'images/1573.jpeg',
-    'images/IMG_8473.jpeg',
-    'images/1568.jpeg',
-    'images/1000011432.jpeg',
-    'images/slika1.jpg',
-    'images/slika2.jpg',
-    'images/slika3.jpg',
-    'images/slika5.jpg',
-    'images/slika6.jpg',
-    'images/slika7.jpg',
-    'images/slika8.jpg',
-    'images/slika9.jpg',
-    'images/slika10.jpg',
-    'images/9921.jpeg',
-    'images/14130.jpeg',
-    'images/IMG_7832.jpeg',
-    'images/1000006911.jpeg',
-    'images/IMG_7770.jpeg',
-    'images/13891.jpeg',
-  ];
 
+  // ===== GALERIJA: filter po kategorijah + lightbox =====
+  const galleryTabs = document.querySelectorAll('.gallery-tab');
+  const galleryItems = document.querySelectorAll('#galleryGrid .g-item');
+
+  function setGalleryCategory(cat) {
+    galleryTabs.forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
+    galleryItems.forEach(item => {
+      item.classList.toggle('g-hidden', item.dataset.cat !== cat);
+    });
+  }
+  galleryTabs.forEach(tab => {
+    tab.addEventListener('click', () => setGalleryCategory(tab.dataset.cat));
+  });
+
+  function getVisibleLightboxImages() {
+    return Array.from(document.querySelectorAll('#galleryGrid .g-item:not(.g-hidden)'))
+      .map(item => item.dataset.lightbox);
+  }
+
+  let lbImages = [];
   let lbIndex = 0;
   const lb = document.getElementById('lightbox');
   const lbImg = document.getElementById('lbImg');
   const lbCounter = document.getElementById('lbCounter');
 
   function lbOpen(src) {
-    lbIndex = allLightboxImages.indexOf(src);
+    lbImages = getVisibleLightboxImages();
+    lbIndex = lbImages.indexOf(src);
     if (lbIndex === -1) lbIndex = 0;
-    lbImg.src = allLightboxImages[lbIndex];
-    lbCounter.textContent = (lbIndex + 1) + ' / ' + allLightboxImages.length;
+    lbImg.src = lbImages[lbIndex];
+    lbCounter.textContent = (lbIndex + 1) + ' / ' + lbImages.length;
     lb.classList.add('active');
     document.body.style.overflow = 'hidden';
     requestAnimationFrame(() => lb.classList.add('visible'));
@@ -1341,12 +1413,12 @@
   }
 
   function lbGo(dir) {
-    lbIndex = (lbIndex + dir + allLightboxImages.length) % allLightboxImages.length;
+    lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
     lbImg.style.opacity = '0';
     setTimeout(() => {
-      lbImg.src = allLightboxImages[lbIndex];
+      lbImg.src = lbImages[lbIndex];
       lbImg.style.opacity = '1';
-      lbCounter.textContent = (lbIndex + 1) + ' / ' + allLightboxImages.length;
+      lbCounter.textContent = (lbIndex + 1) + ' / ' + lbImages.length;
     }, 150);
   }
 
@@ -1371,11 +1443,10 @@
   });
 
   // Odpri lightbox na klik na vsak g-item
-  document.querySelectorAll('.g-item[data-lightbox]').forEach(el => {
+  galleryItems.forEach(el => {
     el.style.cursor = 'pointer';
     el.addEventListener('click', () => lbOpen(el.dataset.lightbox));
   });
-
 
 </script>
 
